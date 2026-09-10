@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../../../core/services/auth.service';
-import { usernameAlphanumericValidator } from '../../../../shared/validators/username.validator';
-import { NotificationService } from '../../../../core/services/notification.service';
-import { passwordValidator } from '../../../../shared/validators/password.validator';
-import { RegisterRequest, RegisterResponse } from '../../../../core/models/auth.model';
+import { AuthService } from '@core/services/auth.service';
+import { usernameAlphanumericValidator } from '@shared/validators/username.validator';
+import { NotificationService } from '@core/services/notification.service';
+import { passwordValidator } from '@shared/validators/password.validator';
+import { RegisterRequest, RegisterResponse } from '@core/models/auth.model';
 
 @Component({
   selector: 'app-register',

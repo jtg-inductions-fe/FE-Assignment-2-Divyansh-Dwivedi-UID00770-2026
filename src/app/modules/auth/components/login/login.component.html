@@ -1,6 +1,7 @@
 <div class="login-container">
   <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <h1 class="login-form__title">Login</h1>
+    <p class="login-form__subtitle">Welcome back to Mind Share! Ready to explore new insights?</p>
 
     <div class="login-form__group">
       <mat-form-field appearance="outline" class="login-form__group-box">
@@ -47,5 +48,9 @@
     >
       Login
     </button>
+    <span class="register-link"
+      >Don't Have An Account ?
+      <a mat-button color="primary" routerLink="/auth/register"> Register Now</a>
+    </span>
   </form>
 </div>

@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #fdfbf7;
   padding: rem(20);
 }
 
@@ -22,6 +23,13 @@
     margin-bottom: rem(25);
   }
 
+  &__subtitle {
+    font-size: 0.95rem;   
+    color: #6c757d;      
+    margin-bottom: rem(24);
+    text-align: center;   
+  }
+
   &__group {
     margin-bottom: rem(20);
   }
@@ -32,5 +40,6 @@
 
   &__button {
     width: 100%;
+    margin-bottom: rem(20);
   }
 }

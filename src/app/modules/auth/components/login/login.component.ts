@@ -2,9 +2,9 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { AuthService } from '../../../../core/services/auth.service';
-import { NotificationService } from '../../../../core/services/notification.service';
-import { LoginRequest, LoginResponse } from '../../../../core/models/auth.model';
+import { AuthService } from '@core/services/auth.service';
+import { NotificationService } from '@core/services/notification.service';
+import { LoginRequest, LoginResponse } from '@core/models/auth.model';
 
 @Component({
   selector: 'app-login',
