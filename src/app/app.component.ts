@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -6,13 +6,8 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'FE-Assignment-2-Divyansh-Dwivedi-UID00770-2026';
 
   private http = inject(HttpClient);
-
-  // to test basic interceptor working
-  ngOnInit() {
-    this.http.get('https://typicode.com').subscribe();
-  }
 }
