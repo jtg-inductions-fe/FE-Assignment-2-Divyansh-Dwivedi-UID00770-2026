@@ -6,7 +6,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GlobalErrorHandler } from './global-error-handler.service';
-import { httpInterceptor } from './core/interceptors/http.interceptor';
+import { authInterceptor } from './core/interceptors/auth.interceptor';
+import { errorInterceptor } from './core/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +18,7 @@ import { httpInterceptor } from './core/interceptors/http.interceptor';
       provide: ErrorHandler,
       useClass: GlobalErrorHandler,
     },
-    provideHttpClient(withInterceptors([httpInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, errorInterceptor])),
   ],
   bootstrap: [AppComponent],
 })
