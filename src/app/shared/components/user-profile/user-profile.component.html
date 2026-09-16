@@ -1,0 +1,26 @@
+@if (user(); as user) {
+  <button class="user-profile" [matMenuTriggerFor]="profileMenu">
+    <img
+      class="user-profile"
+      src="assets/images/profile1.svg"
+      alt="User Avatar that opens user specific options"
+    />
+  </button>
+
+  <mat-menu #profileMenu="matMenu">
+    <div class="personal-details">
+      <h2 class="username">{{ user.username }}</h2>
+      <span user.email>
+        {{ user.email }}
+      </span>
+    </div>
+    <button mat-menu-item>
+      <mat-icon>article</mat-icon>
+      <span>My Articles</span>
+    </button>
+    <button mat-menu-item class="logout-item" (click)="onLogout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+}

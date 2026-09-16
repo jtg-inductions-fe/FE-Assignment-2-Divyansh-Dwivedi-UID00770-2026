@@ -1,1 +1,15 @@
-<p>dashboard works!</p>
+<app-user-profile></app-user-profile>
+
+<div class="article-grid">
+  @for (article of articles; track article) {
+    <app-article-card [article]="article"> </app-article-card>
+  }
+</div>
+
+<mat-paginator
+  [length]="totalItems"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[8, 12]"
+  (page)="onPageChange($event)"
+>
+</mat-paginator>
