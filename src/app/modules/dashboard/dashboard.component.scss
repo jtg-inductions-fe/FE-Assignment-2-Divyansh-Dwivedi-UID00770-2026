@@ -1,0 +1,29 @@
+@use '../../../styles/functions' as *;
+
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 30px 70px;
+  padding-bottom: 10px;
+}
+
+@media (width <= rem(1200)) {
+  .article-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (width <= rem(900)) {
+  .article-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width <= rem(600)) {
+  .article-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
