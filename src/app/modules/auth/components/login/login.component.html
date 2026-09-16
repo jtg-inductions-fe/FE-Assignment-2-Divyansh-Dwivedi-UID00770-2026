@@ -1,0 +1,56 @@
+<div class="login-container">
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h1 class="login-form__title">Login</h1>
+    <p class="login-form__subtitle">Welcome back to Mind Share! Ready to explore new insights?</p>
+
+    <div class="login-form__group">
+      <mat-form-field appearance="outline" class="login-form__group-box">
+        <mat-label>Username</mat-label>
+
+        <input
+          matInput
+          type="text"
+          id="username"
+          formControlName="username"
+          placeholder="Enter your username"
+        />
+
+        @if (loginForm.controls.username.hasError('required')) {
+          <mat-error>Username is required</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="login-form__group">
+      <mat-form-field appearance="outline" class="login-form__group-box">
+        <mat-label>Password</mat-label>
+
+        <input
+          matInput
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+
+        @if (loginForm.controls.password.hasError('required')) {
+          <mat-error>Password is required</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <button
+      class="login-form__button"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="loginForm.invalid"
+    >
+      Login
+    </button>
+    <span class="register-link"
+      >Don't Have An Account ?
+      <a mat-button color="primary" routerLink="/auth/register"> Register Now</a>
+    </span>
+  </form>
+</div>

@@ -1,0 +1,88 @@
+<div class="register-container">
+  <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <h1 class="register-form__title">Register</h1>
+    <p class="register-form__subtitle">Welcome to Mind Share! Ready to explore new insights?</p>
+
+    <div class="register-form__group">
+      <mat-form-field appearance="outline" class="register-form__group-box">
+        <mat-label>Username</mat-label>
+
+        <input
+          matInput
+          type="text"
+          id="username"
+          formControlName="username"
+          placeholder="Enter your username"
+        />
+
+        @if (registerForm.controls.username.hasError('required')) {
+          <mat-error>Username is required</mat-error>
+        } @else if (registerForm.controls.username.hasError('minlength')) {
+          <mat-error>Username must be at least 3 characters</mat-error>
+        } @else if (registerForm.controls.username.hasError('maxlength')) {
+          <mat-error>Username cannot exceed 30 characters</mat-error>
+        } @else if (registerForm.controls.username.hasError('usernameAlphanumeric')) {
+          <mat-error>Username can contain only letters and numbers</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="register-form__group">
+      <mat-form-field appearance="outline" class="register-form__group-box">
+        <mat-label>Email</mat-label>
+
+        <input
+          matInput
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
+
+        @if (registerForm.controls.email.hasError('required')) {
+          <mat-error>Email is required</mat-error>
+        } @else if (registerForm.controls.email.hasError('email')) {
+          <mat-error>Please enter a valid email</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="register-form__group">
+      <mat-form-field appearance="outline" class="register-form__group-box">
+        <mat-label>Password</mat-label>
+
+        <input
+          matInput
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+
+        @if (registerForm.controls.password.hasError('required')) {
+          <mat-error>Password is required</mat-error>
+        } @else if (registerForm.controls.password.hasError('minlength')) {
+          <mat-error>Password must be at least 8 characters</mat-error>
+        } @else if (registerForm.controls.password.hasError('minSpecialCharacters')) {
+          <mat-error>Password must contain at least 2 special characters</mat-error>
+        } @else if (registerForm.controls.password.hasError('minNumericCharacters')) {
+          <mat-error>Password must contain at least 2 numeric characters</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <button
+      class="register-form__button"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="registerForm.invalid"
+    >
+      Register
+    </button>
+    <span class="login-link"
+      >Already Have An Account ?
+      <a mat-button color="primary" target="_self" routerLink="/auth/login"> Login Here</a>
+    </span>
+  </form>
+</div>
