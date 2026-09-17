@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   private readonly notificationService = inject(NotificationService);
 
   articles: Article[] = [];
+  isLoading = true;
 
   totalItems = 0;
   pageSize = 8;
@@ -30,9 +31,11 @@ export class DashboardComponent implements OnInit {
       next: (response: GetArticlesResponse) => {
         this.articles = response.data.data;
         this.totalItems = response.data.totalItems;
+        this.isLoading = false;
       },
       error: () => {
         this.notificationService.error('Failed to load articles');
+        this.isLoading = false;
       },
     });
   }
