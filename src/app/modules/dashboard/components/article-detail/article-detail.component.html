@@ -1,0 +1,35 @@
+<app-user-profile></app-user-profile>
+@if (article) {
+  <div class="article-detail">
+    <a routerLink="/dashboard" class="article-detail__back-link">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Back to Dashboard</span>
+    </a>
+
+    <h1 class="article-detail__title">
+      {{ article.title }}
+    </h1>
+
+    <p class="article-detail__meta">By {{ article.author }} - {{ article.createdAt | date }}</p>
+
+    @if (article.image) {
+      <img class="article-detail__image" [src]="article.image" alt="article image" />
+    }
+
+    <div class="article-detail__content">
+      <p class="article-detail__description">
+        {{ article.description }}
+      </p>
+    </div>
+
+    <div>
+      <mat-chip-set>
+        @for (tag of article.tags; track tag) {
+          <mat-chip>
+            {{ tag }}
+          </mat-chip>
+        }
+      </mat-chip-set>
+    </div>
+  </div>
+}

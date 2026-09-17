@@ -7,17 +7,8 @@
 </div>
 
 <div class="article-grid">
-  @for (article of articles; track article.id) {
+  @for (article of articles; track article) {
     <app-article-card [article]="article" [routerLink]="['/dashboard/article', article.id]">
     </app-article-card>
   }
 </div>
-
-<mat-paginator
-  [disabled]="isLoading"
-  [length]="totalItems"
-  [pageSize]="pageSize"
-  [pageSizeOptions]="[8, 12]"
-  (page)="onPageChange($event)"
->
-</mat-paginator>

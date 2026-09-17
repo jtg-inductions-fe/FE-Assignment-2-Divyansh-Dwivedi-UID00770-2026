@@ -3,7 +3,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment.development';
 
-import { GetArticlesResponse } from '@core/models/article.model';
+import {
+  GetArticlesResponse,
+  GetUserArticlesResponse,
+  GetArticleById,
+} from '@core/models/article.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +20,13 @@ export class ArticleService {
     const params = new HttpParams().set('page', page).set('pageSize', pageSize);
 
     return this.http.get<GetArticlesResponse>(this.apiUrl, { params });
+  }
+
+  getUserArticles(): Observable<GetUserArticlesResponse> {
+    return this.http.get<GetUserArticlesResponse>(`${this.apiUrl}/my`);
+  }
+
+  getArticleById(id: string): Observable<GetArticleById> {
+    return this.http.get<GetArticleById>(`${this.apiUrl}/${id}`);
   }
 }
