@@ -7,6 +7,9 @@ import {
   GetArticlesResponse,
   GetUserArticlesResponse,
   GetArticleById,
+  CreateArticleRequest,
+  CreateArticleResponse,
+  DeleteArticleResponse,
 } from '@core/models/article.model';
 
 @Injectable({
@@ -28,5 +31,13 @@ export class ArticleService {
 
   getArticleById(id: string): Observable<GetArticleById> {
     return this.http.get<GetArticleById>(`${this.apiUrl}/${id}`);
+  }
+
+  createArticle(request: CreateArticleRequest): Observable<CreateArticleResponse> {
+    return this.http.post<CreateArticleResponse>(this.apiUrl, request);
+  }
+
+  deleteArticle(id: string): Observable<DeleteArticleResponse> {
+    return this.http.delete<DeleteArticleResponse>(`${this.apiUrl}/${id}`);
   }
 }

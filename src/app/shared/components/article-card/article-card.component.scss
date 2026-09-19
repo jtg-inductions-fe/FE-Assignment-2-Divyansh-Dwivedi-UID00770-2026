@@ -57,6 +57,11 @@
   color: #666;
   font-size: rem(14);
   line-height: 1.6;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
 }
 
 .article-footer {

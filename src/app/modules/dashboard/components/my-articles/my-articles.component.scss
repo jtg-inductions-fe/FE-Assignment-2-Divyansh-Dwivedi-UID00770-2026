@@ -8,6 +8,19 @@
   padding-bottom: 10px;
 }
 
+.card-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-actions {
+  display: flex;
+
+  &__delete {
+    margin-left: auto;
+  }
+}
+
 @media (width <= rem(1200)) {
   .article-grid {
     grid-template-columns: repeat(3, 1fr);

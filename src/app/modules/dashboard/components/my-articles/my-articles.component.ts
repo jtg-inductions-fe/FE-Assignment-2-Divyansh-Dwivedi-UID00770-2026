@@ -1,6 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { Article, GetUserArticlesResponse } from '@core/models/article.model';
+import {
+  Article,
+  DeleteArticleResponse,
+  GetUserArticlesResponse,
+} from '@core/models/article.model';
 import { ArticleService } from '@core/services/article.service';
 import { NotificationService } from '@core/services/notification.service';
 
@@ -12,6 +17,7 @@ import { NotificationService } from '@core/services/notification.service';
 export class MyArticlesComponent implements OnInit {
   private readonly articleService = inject(ArticleService);
   private readonly notificationService = inject(NotificationService);
+  private readonly router = inject(Router);
 
   articles: Article[] = [];
   isLoading = true;
@@ -29,6 +35,18 @@ export class MyArticlesComponent implements OnInit {
       error: () => {
         this.notificationService.error('Failed to load articles');
         this.isLoading = false;
+      },
+    });
+  }
+
+  deleteCurrentArticle(articleId: string): void {
+    this.articleService.deleteArticle(articleId).subscribe({
+      next: (response: DeleteArticleResponse) => {
+        this.notificationService.success(response.message);
+        this.articles = this.articles.filter((article) => article.id !== articleId);
+      },
+      error: () => {
+        this.notificationService.error('Unable to delete article');
       },
     });
   }

@@ -37,3 +37,24 @@ export interface GetArticleById {
   data: Article;
   timestamp: string;
 }
+
+export interface CreateArticleRequest {
+  title: string;
+  shortDescription: string;
+  description: string;
+  image: string;
+  tags: string[];
+}
+
+export interface CreateArticleResponse {
+  success: boolean;
+  message: string;
+  data: Article;
+  timestamp: string;
+}
+export interface DeleteArticleResponse {
+  success: boolean;
+  message: string;
+  data: null;
+  timestamp: string;
+}
