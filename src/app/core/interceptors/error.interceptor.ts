@@ -3,18 +3,23 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 
+import { APP_ROUTES } from '@core/constants/app-routes';
+import { STORAGE_KEYS } from '@core/constants/storage-keys';
+
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
 
   return next(req).pipe(
     catchError((error) => {
-      if (error.status === 401) {
-        localStorage.removeItem('token');
-        router.navigate(['/auth/login']);
-      }
+      switch (error.status) {
+        case 401:
+          localStorage.removeItem(STORAGE_KEYS.TOKEN);
+          router.navigate([APP_ROUTES.AUTH.LOGIN]);
+          break;
 
-      if (error.status === 500) {
-        console.error('Critical Server Error (500) encountered.');
+        case 500:
+          console.error('Critical Server Error (500)', error);
+          break;
       }
 
       return throwError(() => error);

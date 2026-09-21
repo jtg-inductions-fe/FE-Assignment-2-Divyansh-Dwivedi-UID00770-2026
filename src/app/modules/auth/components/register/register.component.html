@@ -1,7 +1,7 @@
 <div class="register-container">
   <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <h1 class="register-form__title">Register</h1>
-    <p class="register-form__subtitle">Welcome to Mind Share! Ready to explore new insights?</p>
+    <p class="register-form__subtitle">Welcome to The Journal! Ready to explore new insights?</p>
 
     <div class="register-form__group">
       <mat-form-field appearance="outline" class="register-form__group-box">
@@ -53,11 +53,17 @@
 
         <input
           matInput
-          type="password"
+          [type]="hidePassword ? 'password' : 'text'"
           id="password"
           formControlName="password"
           placeholder="Enter your password"
         />
+
+        <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+          <mat-icon>
+            {{ hidePassword ? 'visibility' : 'visibility_off' }}
+          </mat-icon>
+        </button>
 
         @if (registerForm.controls.password.hasError('required')) {
           <mat-error>Password is required</mat-error>
@@ -82,7 +88,9 @@
     </button>
     <span class="login-link"
       >Already Have An Account ?
-      <a mat-button color="primary" target="_self" routerLink="/auth/login"> Login Here</a>
+      <a mat-button color="primary" target="_self" [routerLink]="APP_ROUTES.AUTH.LOGIN">
+        Login Here</a
+      >
     </span>
   </form>
 </div>
