@@ -1,0 +1,19 @@
+@use 'variables' as *;
+
+.success-snackbar {
+  --mdc-snackbar-container-color: #{$color-snackbar-success};
+  --mdc-snackbar-supporting-text-color: #{$color-text-white};
+
+  .mat-mdc-button {
+    color: #000 !important;
+  }
+}
+
+.error-snackbar {
+  --mdc-snackbar-container-color: #{$color-snackbar-error};
+  --mdc-snackbar-supporting-text-color: #{$color-text-white};
+
+  .mat-mdc-button {
+    color: #000 !important;
+  }
+}

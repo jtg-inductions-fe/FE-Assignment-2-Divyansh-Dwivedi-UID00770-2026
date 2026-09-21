@@ -1,0 +1,124 @@
+<div class="register-container">
+  <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <h1 class="register-form__title">Register</h1>
+    <p class="register-form__subtitle">Welcome to The Journal! Ready to explore new insights?</p>
+
+    <div class="register-form__group">
+      <mat-form-field appearance="outline" class="register-form__group-box">
+        <mat-label>Username</mat-label>
+
+        <input
+          matInput
+          type="text"
+          id="username"
+          formControlName="username"
+          placeholder="Enter your username"
+        />
+        <mat-error>
+          <ng-container
+            *ngTemplateOutlet="
+              usernameErrors;
+              context: { $implicit: registerForm.controls.username }
+            "
+          ></ng-container>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="register-form__group">
+      <mat-form-field appearance="outline" class="register-form__group-box">
+        <mat-label>Email</mat-label>
+
+        <input
+          matInput
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
+        <mat-error>
+          <ng-container
+            *ngTemplateOutlet="emailErrors; context: { $implicit: registerForm.controls.email }"
+          ></ng-container>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="register-form__group">
+      <mat-form-field appearance="outline" class="register-form__group-box">
+        <mat-label>Password</mat-label>
+
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          id="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+
+        <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+          <mat-icon>
+            {{ hidePassword ? 'visibility' : 'visibility_off' }}
+          </mat-icon>
+        </button>
+
+        <mat-error>
+          <ng-container
+            *ngTemplateOutlet="
+              passwordErrors;
+              context: { $implicit: registerForm.controls.password }
+            "
+          ></ng-container>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button
+      class="register-form__button"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="registerForm.invalid"
+    >
+      Register
+    </button>
+    <span class="login-link"
+      >Already Have An Account ?
+      <a mat-button color="primary" target="_self" [routerLink]="APP_ROUTES.AUTH.LOGIN">
+        Login Here</a
+      >
+    </span>
+  </form>
+</div>
+
+<ng-template #usernameErrors let-control>
+  @if (control.hasError('required')) {
+    Username is required
+  } @else if (control.hasError('minlength')) {
+    Username must be at least 3 characters
+  } @else if (control.hasError('maxlength')) {
+    Username cannot exceed 30 characters
+  } @else if (control.hasError('usernameAlphanumeric')) {
+    Username can contain only letters and numbers
+  }
+</ng-template>
+
+<ng-template #emailErrors let-control>
+  @if (control.hasError('required')) {
+    Email is required
+  } @else if (control.hasError('email')) {
+    Please enter a valid email
+  }
+</ng-template>
+
+<ng-template #passwordErrors let-control>
+  @if (control.hasError('required')) {
+    Password is required
+  } @else if (control.hasError('minlength')) {
+    Password must be at least 8 characters
+  } @else if (control.hasError('minSpecialCharacters')) {
+    Password must contain at least 2 special characters
+  } @else if (control.hasError('minNumericCharacters')) {
+    Password must contain at least 2 numeric characters
+  }
+</ng-template>
