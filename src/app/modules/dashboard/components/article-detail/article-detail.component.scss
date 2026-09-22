@@ -1,14 +1,16 @@
 @use 'functions' as *;
+@use 'variables' as *;
+@use 'typography' as *;
 
 .article-detail {
   max-width: rem(900);
   margin: rem(40) auto;
-  padding: 0 24px 60px;
+  padding: 0 rem(24) rem(60);
 
   &__back-link {
     display: flex;
-    margin-bottom: 24px;
-    color: #3f51b5;
+    margin-bottom: rem(24);
+    color: $color-link-blue;
     text-decoration: none;
 
     &:hover {
@@ -17,35 +19,35 @@
   }
 
   &__title {
-    margin: 0 0 12px;
-    color: #222;
-    font-size: 40px;
-    font-weight: 700;
-    line-height: 1.5;
+    @extend .article-detail;
+
+    margin: 0 0 rem(12);
+    color: $color-title-black;
   }
 
   &__meta {
-    margin: 0 0 28px;
-    color: #666;
-    font-size: 15px;
+    @extend .article-meta;
+
+    margin: 0 0 rem(28);
+    color: $color-meta-gray;
   }
 
   &__image {
     display: block;
     width: 100%;
-    max-height: 500px;
-    margin-bottom: 32px;
+    max-height: rem(500);
+    margin-bottom: rem(32);
     border-radius: 12px;
   }
 
   &__content {
-    margin-bottom: 32px;
+    margin-bottom: rem(32);
   }
 
   &__description {
+    @extend .article-description;
+
     margin: 0;
-    color: #333;
-    font-size: 17px;
-    line-height: 1.8;
+    color: $color-description-light-black;
   }
 }

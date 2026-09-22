@@ -1,19 +1,21 @@
 @use 'functions' as *;
+@use 'variables' as *;
+@use 'typography' as *;
 
 .login-container {
-  position: fixed;
+  position: absolute;
   inset:0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fdfbf7;
+  background: $color-text-off-white;
   padding: rem(20);
 }
 
 .login-form {
   width: 100%;
   max-width: rem(400);
-  background: #fff;
+  background: $color-text-white;
   padding: rem(30);
   border-radius: rem(8);
   box-shadow: 0 4px 15px rgb(0 0 0 / 10%);
@@ -24,8 +26,9 @@
   }
 
   &__subtitle {
-    font-size: 0.95rem;   
-    color: #6c757d;      
+    @extend .subtitle; 
+
+    color: $color-text-gray;      
     margin-bottom: rem(24);
     text-align: center;   
   }
@@ -42,4 +45,10 @@
     width: 100%;
     margin-bottom: rem(20);
   }
+}
+
+.register-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

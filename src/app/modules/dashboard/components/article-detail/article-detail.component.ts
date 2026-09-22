@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Article, GetArticleById } from '@core/models/article.model';
 import { ArticleService } from '@core/services/article.service';
+import { APP_ROUTES } from '@core/constants/app-routes';
 
 @Component({
   selector: 'app-article-detail',
@@ -28,7 +29,7 @@ export class ArticleDetailComponent implements OnInit {
         this.article = response.data;
       },
       error: () => {
-        this.router.navigate(['/not-found'], { skipLocationChange: true });
+        this.router.navigate([APP_ROUTES.NOT_FOUND], { skipLocationChange: true });
       },
     });
   }
