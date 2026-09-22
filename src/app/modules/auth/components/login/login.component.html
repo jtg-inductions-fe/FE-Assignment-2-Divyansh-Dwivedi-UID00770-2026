@@ -27,11 +27,17 @@
 
         <input
           matInput
-          type="password"
+          [type]="hidePassword ? 'password' : 'text'"
           id="password"
           formControlName="password"
           placeholder="Enter your password"
         />
+
+        <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+          <mat-icon>
+            {{ hidePassword ? 'visibility' : 'visibility_off' }}
+          </mat-icon>
+        </button>
 
         @if (loginForm.controls.password.hasError('required')) {
           <mat-error>Password is required</mat-error>
@@ -51,7 +57,7 @@
 
     <span class="register-link"
       >Don't Have An Account ?
-      <a mat-button color="primary" routerLink="/auth/register"> Register Now</a>
+      <a mat-button color="primary" [routerLink]="APP_ROUTES.AUTH.REGISTER"> Register Now</a>
     </span>
   </form>
 </div>

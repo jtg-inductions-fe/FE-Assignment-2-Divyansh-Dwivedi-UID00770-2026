@@ -1,8 +1,11 @@
 import { ErrorHandler } from '@angular/core';
 import { inject } from '@angular/core';
 
+import { Injectable } from '@angular/core';
+
 import { NotificationService } from '@core/services/notification.service';
 
+@Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
   private readonly notificationService = inject(NotificationService);
   handleError(error: unknown): void {

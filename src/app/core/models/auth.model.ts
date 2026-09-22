@@ -1,9 +1,9 @@
 export interface LoginRequest {
-  email: string;
+  username: string;
   password: string;
 }
 
-export interface LoginUser {
+export interface User {
   id: number;
   username: string;
   email: string;
@@ -12,7 +12,7 @@ export interface LoginUser {
 }
 
 export interface LoginResponseData {
-  user: LoginUser;
+  user: User;
   token: string;
 }
 
@@ -37,13 +37,6 @@ export interface RegisterResponse {
 }
 
 export interface RegisterResponseData {
-  user: RegisterUser;
+  user: User;
   token: string;
-}
-export interface RegisterUser {
-  id: number;
-  username: string;
-  email: string;
-  createdAt: string;
-  updatedAt: string;
 }
