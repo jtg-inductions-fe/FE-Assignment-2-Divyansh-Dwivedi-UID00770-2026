@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-
 import { RouterModule, Routes } from '@angular/router';
 
+import { authGuard } from '@core/guards/auth.guard';
+import { guestGuard } from '@core/guards/guest.guard';
+import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 import { APP_ROUTES } from '@core/constants/app-routes';
-
-import { authGuard } from './core/guards/auth.guard';
-import { guestGuard } from './core/guards/guest.guard';
 
 const routes: Routes = [
   {
@@ -23,6 +22,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule),
     canActivate: [authGuard],
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 

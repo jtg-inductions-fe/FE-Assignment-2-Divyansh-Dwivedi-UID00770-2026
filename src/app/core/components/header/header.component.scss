@@ -1,0 +1,30 @@
+@use 'functions' as *;
+@use 'variables' as *;
+
+.header {
+  background-color: $color-text-white;
+  color: $color-header-black;
+  height: rem(65);
+  border-bottom: 1px solid $color-border-white;
+  position: relative;
+  z-index: 1000; 
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: rem(16);
+    text-decoration: none;
+    color: $color-text-black;
+  }
+
+  &__logo {
+    height: rem(32);
+    width: rem(32);
+    fill: $color-header-black;
+  }
+
+  &__title {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+}

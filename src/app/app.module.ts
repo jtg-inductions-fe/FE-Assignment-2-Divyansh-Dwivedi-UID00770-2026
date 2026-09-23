@@ -4,17 +4,24 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+import { NgOptimizedImage } from '@angular/common';
+
 import { authInterceptor } from '@core/interceptors/auth.interceptor';
 import { errorInterceptor } from '@core/interceptors/error.interceptor';
 import { apiUrlInterceptor } from '@core/interceptors/api-url.interceptor';
 
+import { SharedModule } from '@shared/shared.module';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GlobalErrorHandler } from './global-error-handler.service';
+import { GlobalErrorHandler } from './core/errors/global-error-handler';
+import { HeaderComponent } from './core/components/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [AppComponent, HeaderComponent],
+  imports: [BrowserModule, AppRoutingModule, SharedModule, MatToolbarModule, NgOptimizedImage],
   providers: [
     provideAnimationsAsync('noop'),
     {
