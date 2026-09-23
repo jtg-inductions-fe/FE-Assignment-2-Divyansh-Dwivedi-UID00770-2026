@@ -9,10 +9,15 @@
 <div class="article-grid">
   @for (article of articles; track article) {
     <div class="card-container">
-      <app-article-card [article]="article" [routerLink]="['/dashboard/article', article.id]">
+      <app-article-card
+        [article]="article"
+        [routerLink]="[APP_ROUTES.DASHBOARD.ARTICLE, article.id]"
+      >
       </app-article-card>
       <div class="card-actions">
-        <button mat-button color="primary"><mat-icon>edit</mat-icon> Update</button>
+        <a mat-button color="primary" (click)="updateArticle(article.id)">
+          <mat-icon>edit</mat-icon> Update
+        </a>
         <button
           mat-button
           color="warn"

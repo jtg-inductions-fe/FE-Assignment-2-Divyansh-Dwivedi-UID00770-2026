@@ -14,14 +14,14 @@
         {{ user.email }}
       </span>
     </div>
-    <button mat-menu-item routerLink="/dashboard/my-articles">
+    <a mat-menu-item [routerLink]="APP_ROUTES.DASHBOARD.MY_ARTICLES">
       <mat-icon>article</mat-icon>
       <span>My Articles</span>
-    </button>
-    <button mat-menu-item routerLink="/dashboard/create-article">
+    </a>
+    <a mat-menu-item [routerLink]="APP_ROUTES.DASHBOARD.CREATE_ARTICLE">
       <mat-icon>article</mat-icon>
       <span>Create Article</span>
-    </button>
+    </a>
     <button mat-menu-item class="logout-item" (click)="onLogout()">
       <mat-icon>logout</mat-icon>
       <span>Logout</span>

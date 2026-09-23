@@ -14,6 +14,7 @@ export class ArticleDetailComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly articleService = inject(ArticleService);
+  protected readonly APP_ROUTES = APP_ROUTES;
 
   article: Article | null = null;
 

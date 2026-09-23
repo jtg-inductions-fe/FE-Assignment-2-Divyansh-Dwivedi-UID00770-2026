@@ -1,7 +1,7 @@
 <app-user-profile></app-user-profile>
 @if (article) {
   <div class="article-detail">
-    <a routerLink="/dashboard" class="article-detail__back-link">
+    <a [routerLink]="APP_ROUTES.DASHBOARD.BASE" class="article-detail__back-link">
       <mat-icon>arrow_back</mat-icon>
       <span>Back to Dashboard</span>
     </a>

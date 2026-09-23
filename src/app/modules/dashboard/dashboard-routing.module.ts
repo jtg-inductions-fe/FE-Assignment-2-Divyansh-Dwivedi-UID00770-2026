@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'create-article',
     component: CreateArticleComponent,
   },
+  {
+    path: 'update-article/:id',
+    component: CreateArticleComponent,
+  },
 ];
 
 @NgModule({

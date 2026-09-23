@@ -1,8 +1,8 @@
 <app-user-profile></app-user-profile>
 <div class="article-container">
   <form class="article-form" [formGroup]="articleForm" (ngSubmit)="onSubmit()">
-    <h1 class="article-form__title">Create Article</h1>
-    <p class="article-form__subtitle">Fill in your details below.</p>
+    <h1 class="article-form__title">{{ isEditMode ? 'Update Article' : 'Create Article' }}</h1>
+    <p class="article-form__subtitle">Fill in article details below.</p>
 
     <div class="article-form__group">
       <mat-form-field appearance="outline" class="article-form__group-box">
@@ -14,11 +14,12 @@
           formControlName="title"
           placeholder="Enter title for your article"
         />
-        @if (articleForm.controls.title.hasError('required')) {
-          <mat-error>Title is required</mat-error>
-        } @else if (articleForm.controls.title.hasError('minlength')) {
-          <mat-error>Title must be at least 5 characters</mat-error>
-        }
+
+        <mat-error>
+          <ng-container
+            *ngTemplateOutlet="titleErrors; context: { $implicit: articleForm.controls.title }"
+          ></ng-container>
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -32,11 +33,15 @@
           cdkTextareaAutosize
         >
         </textarea>
-        @if (articleForm.controls.shortDescription.hasError('required')) {
-          <mat-error>Short Description is required</mat-error>
-        } @else if (articleForm.controls.shortDescription.hasError('minLength')) {
-          <mat-error>Short Description must be at least 10 characters</mat-error>
-        }
+
+        <mat-error>
+          <ng-container
+            *ngTemplateOutlet="
+              shortDescriptionErrors;
+              context: { $implicit: articleForm.controls.shortDescription }
+            "
+          ></ng-container>
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -51,11 +56,14 @@
         >
         </textarea>
 
-        @if (articleForm.controls.description.hasError('required')) {
-          <mat-error>Description is required</mat-error>
-        } @else if (articleForm.controls.description.hasError('minLength')) {
-          <mat-error>Description must be at least 50 characters</mat-error>
-        }
+        <mat-error>
+          <ng-container
+            *ngTemplateOutlet="
+              descriptionErrors;
+              context: { $implicit: articleForm.controls.description }
+            "
+          ></ng-container>
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -99,7 +107,31 @@
       type="submit"
       [disabled]="articleForm.invalid"
     >
-      Create Article
+      {{ isEditMode ? 'Update Article' : 'Create Article' }}
     </button>
   </form>
 </div>
+
+<ng-template #titleErrors let-control>
+  @if (control.hasError('required')) {
+    Title is required
+  } @else if (control.hasError('minlength')) {
+    Title must be at least 5 characters
+  }
+</ng-template>
+
+<ng-template #shortDescriptionErrors let-control>
+  @if (control.hasError('required')) {
+    Short Description is required
+  } @else if (control.hasError('minlength')) {
+    Short Description must be at least 10 characters
+  }
+</ng-template>
+
+<ng-template #descriptionErrors let-control>
+  @if (control.hasError('required')) {
+    Description is required
+  } @else if (control.hasError('minlength')) {
+    Description must be at least 50 characters
+  }
+</ng-template>

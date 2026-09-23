@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatButtonModule } from '@angular/material/button';
 
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -20,6 +21,7 @@ import { ArticleCardComponent } from './components/article-card/article-card.com
     MatMenuModule,
     MatCardModule,
     MatChipsModule,
+    MatButtonModule,
   ],
   exports: [NotFoundComponent, CommonModule, UserProfileComponent, ArticleCardComponent],
 })

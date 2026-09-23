@@ -40,4 +40,8 @@ export class ArticleService {
   deleteArticle(id: string): Observable<DeleteArticleResponse> {
     return this.http.delete<DeleteArticleResponse>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`);
   }
+
+  updateArticle(id: string, request: CreateArticleRequest): Observable<CreateArticleResponse> {
+    return this.http.put<CreateArticleResponse>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`, request);
+  }
 }

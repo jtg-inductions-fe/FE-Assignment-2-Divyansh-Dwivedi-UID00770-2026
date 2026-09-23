@@ -8,12 +8,13 @@
 
 <div class="article-grid">
   @for (article of articles; track article.id) {
-    <app-article-card [article]="article" [routerLink]="['/dashboard/article', article.id]">
+    <app-article-card [article]="article" [routerLink]="[APP_ROUTES.DASHBOARD.ARTICLE, article.id]">
     </app-article-card>
   }
 </div>
 
 <mat-paginator
+  class="pagination"
   [disabled]="isLoading"
   [length]="totalItems"
   [pageSize]="pageSize"

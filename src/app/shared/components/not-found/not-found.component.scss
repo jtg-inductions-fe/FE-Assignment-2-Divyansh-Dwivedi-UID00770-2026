@@ -1,4 +1,6 @@
 @use 'functions' as *;
+@use 'variables' as *;
+@use 'typography' as *;
 
 .error-page {
   display: flex;
@@ -6,8 +8,8 @@
   justify-content: center;
   min-height: 90vh;
   width: 100%;
-  background-color: #f8f9fa;
-  color: #333;
+  background-color: $color-not-found-white;
+  color: $color-light-black;
   padding: rem(20);
   box-sizing: border-box;
 
@@ -17,24 +19,23 @@
   }
 
   &__title {
-    font-size: rem(100);
-    font-weight: 900;
+    @extend .not-found-title;
+
     margin: 0;
-    line-height: 1;
-    color: #0056b3;
+    color: $color-not-found-title;
   }
 
   &__subtitle {
-    font-size: rem(30);
-    font-weight: 700;
+    @extend .not-found-subtitle;
+
     margin: 10px 0 20px;
-    color: #212529;
+    color: $color-not-found-subtitle;
   }
 
   &__description {
-    font-size: rem(15);
-    line-height: 1.6;
-    color: #6c757d;
+    @extend .not-found-description;
+
+    color: $color-text-gray;
     margin-bottom: rem(30);
   }
 
@@ -42,27 +43,6 @@
     display: flex;
     justify-content: center;
     gap: rem(15);
-  }
-
-  &__button {
-    display: inline-block;
-    padding: rem(12) rem(24);
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    cursor: pointer;
-
-    &--primary {
-      background-color: #0056b3;
-      color: #fff;
-      border: 1px solid transparent;
-
-      &:hover {
-        background-color: #004085;
-      }
-    }
   }
 }
 

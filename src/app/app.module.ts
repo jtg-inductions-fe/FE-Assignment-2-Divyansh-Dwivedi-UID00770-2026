@@ -29,7 +29,7 @@ import { HeaderComponent } from './core/components/header/header.component';
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {
-        duration: 3000,
+        duration: 2000,
         horizontalPosition: 'right',
         verticalPosition: 'top',
       },

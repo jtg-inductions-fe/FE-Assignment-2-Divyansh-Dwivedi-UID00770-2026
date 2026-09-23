@@ -32,3 +32,20 @@ $material-typography: mat.define-typography-config(
   font-weight: 400;
   line-height: 1.8;
 }
+
+.not-found-title {
+  font-size: 6.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.not-found-subtitle {
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.not-found-description {
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
