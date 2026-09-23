@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
-import { LoginRequest, LoginResponse } from '@core/models/auth.model';
+import { LoginRequest, AuthResponse } from '@core/models/auth.model';
 import { APP_ROUTES } from '@core/constants/app-routes';
 
 @Component({
@@ -38,7 +38,7 @@ export class LoginComponent {
     }
 
     this.authService.login(this.loginForm.value as LoginRequest).subscribe({
-      next: (response: LoginResponse) => {
+      next: (response: AuthResponse) => {
         this.notificationService.success(response.message);
         this.router.navigate([APP_ROUTES.DASHBOARD]);
       },

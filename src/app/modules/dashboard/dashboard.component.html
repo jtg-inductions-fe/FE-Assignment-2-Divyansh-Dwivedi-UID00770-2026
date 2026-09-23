@@ -15,8 +15,8 @@
 <mat-paginator
   [disabled]="isLoading"
   [length]="totalItems"
-  [pageSize]="pageSize"
-  [pageSizeOptions]="[8, 12]"
+  [pageSize]="defaultPageSize"
+  [pageSizeOptions]="pageSizeOptions"
   (page)="onPageChange($event)"
 >
 </mat-paginator>

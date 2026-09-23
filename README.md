@@ -1,4 +1,4 @@
-# FEAssignment2DivyanshDwivediUID007702026
+# FE Assignment 2 Divyansh Dwivedi UID 007702026
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
 

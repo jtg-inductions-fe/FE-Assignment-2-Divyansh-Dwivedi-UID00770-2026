@@ -1,4 +1,4 @@
-@if (user(); as user) {
+@if (userProfile) {
   <button class="user-profile" [matMenuTriggerFor]="profileMenu">
     <img
       class="user-profile"
@@ -9,9 +9,9 @@
 
   <mat-menu #profileMenu="matMenu">
     <div class="personal-details">
-      <h2 class="username">{{ user.username }}</h2>
-      <span user.email>
-        {{ user.email }}
+      <h2 class="personal-details__username">{{ userProfile.data.username }}</h2>
+      <span class="personal-details__email">
+        {{ userProfile.data.email }}
       </span>
     </div>
     <button mat-menu-item>

@@ -1,6 +1,8 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 
+import { APP_ROUTES } from '@core/constants/app-routes';
+
 import { AuthService } from '@core/services/auth.service';
 
 export const guestGuard: CanActivateFn = () => {
@@ -11,5 +13,5 @@ export const guestGuard: CanActivateFn = () => {
     return true;
   }
 
-  return router.createUrlTree(['/dashboard']);
+  return router.createUrlTree([APP_ROUTES.DASHBOARD.BASE]);
 };

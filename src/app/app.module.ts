@@ -6,6 +6,8 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { NgOptimizedImage } from '@angular/common';
+
 import { authInterceptor } from '@core/interceptors/auth.interceptor';
 import { errorInterceptor } from '@core/interceptors/error.interceptor';
 import { apiUrlInterceptor } from '@core/interceptors/api-url.interceptor';
@@ -19,7 +21,7 @@ import { HeaderComponent } from './core/components/header/header.component';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, MatToolbarModule],
+  imports: [BrowserModule, AppRoutingModule, SharedModule, MatToolbarModule, NgOptimizedImage],
   providers: [
     provideAnimationsAsync('noop'),
     {

@@ -1,4 +1,5 @@
-@use '../../../../styles/functions' as *;
+@use 'functions' as *;
+@use 'variables' as *;
 
 .article-card {
   height: 100%;
@@ -19,7 +20,7 @@
   width: 100%;
   height: rem(200);
   overflow: hidden;
-  background-color: #f5f5f5;
+  background-color: $color-text-off-white;
 }
 
 .article-image {
@@ -54,19 +55,19 @@
 
 .article-description {
   margin: 0;
-  color: #666;
+  color: $color-dark-gray;
   font-size: rem(14);
   line-height: 1.6;
 }
 
-.article-footer {
+.article-card-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: rem(12) rem(20) rem(18);
   margin-top: auto;
   border-top: 1px solid #eee;
-  color: #666;
+  color: $color-dark-gray;
   font-size: rem(13);
 }
 
