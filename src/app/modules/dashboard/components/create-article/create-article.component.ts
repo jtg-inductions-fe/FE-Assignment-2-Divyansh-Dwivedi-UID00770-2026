@@ -1,11 +1,11 @@
-import { Component, inject, OnInit } from '@angular/core'; // Added OnInit
+import { Component, inject, OnInit } from '@angular/core';
 import { Validators, FormArray, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router'; // Added ActivatedRoute
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 import { ArticleService } from '@core/services/article.service';
 import { NotificationService } from '@core/services/notification.service';
+import { APP_ROUTES } from '@core/constants/app-routes';
 import {
   CreateArticleRequest,
   CreateArticleResponse,
@@ -21,6 +21,7 @@ export class CreateArticleComponent implements OnInit {
   private readonly articleService = inject(ArticleService);
   private readonly notificationService = inject(NotificationService);
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   isEditMode = false;
   articleId: string | null = null;
@@ -58,6 +59,7 @@ export class CreateArticleComponent implements OnInit {
         },
         error: (error) => {
           this.notificationService.error(error.error?.message || 'Failed to fetch article data');
+          this.router.navigate([APP_ROUTES.NOT_FOUND]);
         },
       });
     }
