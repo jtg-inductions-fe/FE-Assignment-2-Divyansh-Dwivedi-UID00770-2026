@@ -1,0 +1,147 @@
+<app-user-profile></app-user-profile>
+<div class="article-container">
+  <form class="article-form" [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+    <h1 class="article-form__title">{{ isEditMode ? 'Update Article' : 'Create Article' }}</h1>
+    <p class="article-form__subtitle">Fill in article details below.</p>
+
+    <div class="article-form__group">
+      <mat-form-field appearance="outline" class="article-form__group-box">
+        <mat-label>Title</mat-label>
+        <input
+          matInput
+          type="text"
+          id="title"
+          formControlName="title"
+          placeholder="Enter title for your article"
+        />
+
+        <mat-error>
+          <ng-container
+            *ngTemplateOutlet="titleErrors; context: { $implicit: articleForm.controls.title }"
+          ></ng-container>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="article-form__group">
+      <mat-form-field appearance="outline" class="article-form__group-box">
+        <mat-label>Short Description</mat-label>
+        <textarea
+          matInput
+          formControlName="shortDescription"
+          placeholder="Enter short description for your article"
+          cdkTextareaAutosize
+        >
+        </textarea>
+
+        <mat-error>
+          <ng-container
+            *ngTemplateOutlet="
+              shortDescriptionErrors;
+              context: { $implicit: articleForm.controls.shortDescription }
+            "
+          ></ng-container>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="article-form__group">
+      <mat-form-field appearance="outline" class="article-form__group-box">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          placeholder="Enter the description for your article"
+          cdkTextareaAutosize
+        >
+        </textarea>
+
+        <mat-error>
+          <ng-container
+            *ngTemplateOutlet="
+              descriptionErrors;
+              context: { $implicit: articleForm.controls.description }
+            "
+          ></ng-container>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="article-form__group">
+      <mat-form-field appearance="outline" class="article-form__group-box">
+        <mat-label>Feature Image</mat-label>
+        <input
+          matInput
+          formControlName="image"
+          placeholder="Insert a feature image for your article"
+        />
+        @if (articleForm.controls.image.hasError('required')) {
+          <mat-error>Image is required</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="article-form__group">
+      <mat-form-field appearance="outline" class="article-form__group-box">
+        <mat-label>Tags</mat-label>
+        <mat-chip-grid #chipGrid>
+          @for (tag of tags.value; track $index) {
+            <mat-chip-row (removed)="removeTag($index)">
+              {{ tag }}
+              <button matChipRemove><mat-icon>cancel</mat-icon></button>
+            </mat-chip-row>
+          }
+          <input
+            placeholder="Enter tag name and press enter"
+            [matChipInputFor]="chipGrid"
+            (matChipInputTokenEnd)="addTag($event)"
+          />
+        </mat-chip-grid>
+      </mat-form-field>
+    </div>
+
+    <button
+      class="article-form__button"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="articleForm.invalid || tags.length === 0"
+    >
+      {{ isEditMode ? 'Update Article' : 'Create Article' }}
+    </button>
+    <a
+      class="article-form__button"
+      mat-raised-button
+      color="warn"
+      (click)="onCancel()"
+      (keydown.enter)="onCancel()"
+      tabindex="0"
+    >
+      Cancel
+    </a>
+  </form>
+</div>
+
+<ng-template #titleErrors let-control>
+  @if (control.hasError('required')) {
+    Title is required
+  } @else if (control.hasError('minlength')) {
+    Title must be at least 5 characters
+  }
+</ng-template>
+
+<ng-template #shortDescriptionErrors let-control>
+  @if (control.hasError('required')) {
+    Short Description is required
+  } @else if (control.hasError('minlength')) {
+    Short Description must be at least 10 characters
+  }
+</ng-template>
+
+<ng-template #descriptionErrors let-control>
+  @if (control.hasError('required')) {
+    Description is required
+  } @else if (control.hasError('minlength')) {
+    Description must be at least 50 characters
+  }
+</ng-template>

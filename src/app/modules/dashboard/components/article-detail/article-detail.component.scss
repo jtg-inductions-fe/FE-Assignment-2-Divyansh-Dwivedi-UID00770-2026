@@ -1,0 +1,60 @@
+@use 'functions' as *;
+@use 'variables' as *;
+@use 'typography' as *;
+
+.article-detail {
+  max-width: rem(900);
+  margin: rem(40) auto;
+  padding: 0 rem(24) rem(60);
+
+  &__back-link {
+    display: flex;
+    margin-bottom: rem(24);
+    color: $color-link-blue;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__title {
+    @extend .article-title;
+
+    margin: 0 0 rem(12);
+    color: $color-title-black;
+  }
+
+  &__meta {
+    @extend .article-meta;
+
+    margin: 0 0 rem(28);
+    color: $color-meta-gray;
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    max-height: rem(500);
+    margin-bottom: rem(32);
+    border-radius: 12px;
+  }
+
+  &__content {
+    margin-bottom: rem(32);
+  }
+
+  &__description {
+    @extend .article-description;
+
+    margin: 0;
+    color: $color-light-black;
+  }
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

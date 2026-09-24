@@ -26,7 +26,7 @@
   }
 
   &__subtitle {
-    @include subtitle;
+    @extend .subtitle;
 
     color: $color-text-gray;      
     margin-bottom: rem(24);

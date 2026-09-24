@@ -10,6 +10,11 @@
   z-index: 1001;
   width: rem(40);
   height: rem(40);
+
+  &__buttons {
+    display: flex;
+  }
+
 }
 
 .personal-details {
@@ -67,3 +72,4 @@
     bottom: 94%;
   }
 }
+

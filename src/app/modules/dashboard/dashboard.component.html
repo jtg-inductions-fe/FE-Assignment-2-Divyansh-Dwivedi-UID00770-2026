@@ -1,22 +1,30 @@
 <app-user-profile></app-user-profile>
 
-<div>
+<div class="loading">
   @if (isLoading) {
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <h1>Loading Articles...</h1>
   }
 </div>
 
-<div class="article-grid">
-  @for (article of articles; track article) {
-    <app-article-card [article]="article"> </app-article-card>
-  }
-</div>
+<div class="page-container">
+  <div class="article-grid">
+    @for (article of articles; track article.id) {
+      <app-article-card
+        [article]="article"
+        [routerLink]="[APP_ROUTES.DASHBOARD.ARTICLE, article.id]"
+      >
+      </app-article-card>
+    }
+  </div>
 
-<mat-paginator
-  [disabled]="isLoading"
-  [length]="totalItems"
-  [pageSize]="defaultPageSize"
-  [pageSizeOptions]="pageSizeOptions"
-  (page)="onPageChange($event)"
->
-</mat-paginator>
+  <mat-paginator
+    class="pagination"
+    [disabled]="isLoading"
+    [length]="totalItems"
+    [pageSize]="defaultPageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</div>

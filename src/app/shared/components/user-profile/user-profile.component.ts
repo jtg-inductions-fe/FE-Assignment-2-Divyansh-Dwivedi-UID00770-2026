@@ -3,6 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { UserProfileResponse } from '@core/models/user.model';
 
 import { AuthService } from '@core/services/auth.service';
+import { APP_ROUTES } from '@core/constants/app-routes';
 import { UserService } from '@core/services/user.service';
 import { NotificationService } from '@core/services/notification.service';
 
@@ -13,6 +14,7 @@ import { NotificationService } from '@core/services/notification.service';
 })
 export class UserProfileComponent implements OnInit {
   private readonly authService = inject(AuthService);
+  protected readonly APP_ROUTES = APP_ROUTES;
   private readonly userService = inject(UserService);
   private readonly notificationService = inject(NotificationService);
 

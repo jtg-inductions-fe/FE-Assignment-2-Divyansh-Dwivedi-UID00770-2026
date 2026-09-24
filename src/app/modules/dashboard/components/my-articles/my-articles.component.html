@@ -1,0 +1,44 @@
+<app-user-profile></app-user-profile>
+
+<div class="loading">
+  @if (isLoading) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <h1>Loading Articles...</h1>
+  }
+</div>
+
+<a [routerLink]="APP_ROUTES.DASHBOARD.BASE" class="my-articles__back-link">
+  <mat-icon>arrow_back</mat-icon>
+  <span>Back</span>
+</a>
+
+<div class="article-grid">
+  @for (article of articles; track article) {
+    <div class="card-container">
+      <app-article-card
+        [article]="article"
+        [routerLink]="[APP_ROUTES.DASHBOARD.ARTICLE, article.id]"
+      >
+      </app-article-card>
+      <div class="card-actions">
+        <a
+          mat-button
+          color="primary"
+          (click)="updateArticle(article.id)"
+          (keydown.enter)="updateArticle(article.id)"
+          tabindex="0"
+        >
+          <mat-icon>edit</mat-icon> Update
+        </a>
+        <button
+          mat-button
+          color="warn"
+          class="card-actions__delete"
+          (click)="deleteCurrentArticle(article.id)"
+        >
+          <mat-icon>delete</mat-icon> Delete
+        </button>
+      </div>
+    </div>
+  }
+</div>

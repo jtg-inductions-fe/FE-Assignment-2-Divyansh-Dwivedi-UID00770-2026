@@ -1,6 +1,8 @@
 @use 'variables' as *;
 
 .success-snackbar {
+  z-index: 102;
+
   --mdc-snackbar-container-color: #{$color-snackbar-success};
   --mdc-snackbar-supporting-text-color: #{$color-text-white};
 
@@ -10,6 +12,8 @@
 }
 
 .error-snackbar {
+  z-index: 102;
+
   --mdc-snackbar-container-color: #{$color-snackbar-error};
   --mdc-snackbar-supporting-text-color: #{$color-text-white};
 
