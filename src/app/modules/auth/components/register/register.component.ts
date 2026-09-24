@@ -6,7 +6,7 @@ import { AuthService } from '@core/services/auth.service';
 import { usernameAlphanumericValidator } from '@shared/validators/username.validator';
 import { NotificationService } from '@core/services/notification.service';
 import { passwordValidator } from '@shared/validators/password.validator';
-import { RegisterRequest, RegisterResponse } from '@core/models/auth.model';
+import { RegisterRequest, AuthResponse } from '@core/models/auth.model';
 import { APP_ROUTES } from '@core/constants/app-routes';
 
 @Component({
@@ -46,7 +46,7 @@ export class RegisterComponent {
     }
 
     this.authService.register(this.registerForm.value as RegisterRequest).subscribe({
-      next: (response: RegisterResponse) => {
+      next: (response: AuthResponse) => {
         this.notificationService.success(response.message);
         this.router.navigate([APP_ROUTES.DASHBOARD]);
       },

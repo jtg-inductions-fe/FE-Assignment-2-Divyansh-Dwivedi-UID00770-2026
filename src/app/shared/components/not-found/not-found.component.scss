@@ -21,6 +21,8 @@
   &__title {
     @extend .not-found-title;
 
+    font-size: rem(80);
+    font-weight: 900;
     margin: 0;
     color: $color-not-found-title;
   }
@@ -28,6 +30,8 @@
   &__subtitle {
     @extend .not-found-subtitle;
 
+    font-size: rem(24);
+    font-weight: 700;
     margin: 10px 0 20px;
     color: $color-not-found-subtitle;
   }
@@ -35,7 +39,9 @@
   &__description {
     @extend .not-found-description;
 
-    color: $color-text-gray;
+    font-size: rem(17);
+    line-height: 1.6;
+    color: #6c757d;
     margin-bottom: rem(30);
   }
 
@@ -53,5 +59,15 @@
 
   .error-page__subtitle {
     font-size: rem(20);
+  }
+}
+
+@media (width >= 480px) {
+  .error-page__title {
+    font-size: rem(128);
+  }
+
+  .error-page__subtitle {
+    font-size: rem(32);
   }
 }

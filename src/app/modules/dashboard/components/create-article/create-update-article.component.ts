@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 import { ArticleService } from '@core/services/article.service';
+import { UserProfileResponse } from '@core/models/user.model';
+import { UserService } from '@core/services/user.service';
 import { NotificationService } from '@core/services/notification.service';
 import { APP_ROUTES } from '@core/constants/app-routes';
 import {
@@ -13,16 +15,19 @@ import {
 } from '@core/models/article.model';
 
 @Component({
-  selector: 'app-create-article',
-  templateUrl: './create-article.component.html',
-  styleUrl: './create-article.component.scss',
+  selector: 'app-create-update-article',
+  templateUrl: './create-update-article.component.html',
+  styleUrl: './create-update-article.component.scss',
 })
-export class CreateArticleComponent implements OnInit {
+export class CreateUpdateArticleComponent implements OnInit {
   private readonly articleService = inject(ArticleService);
   private readonly notificationService = inject(NotificationService);
   private readonly route = inject(ActivatedRoute);
+  private readonly userService = inject(UserService);
   private readonly router = inject(Router);
 
+  userProfile?: UserProfileResponse;
+  article?: GetArticleById;
   isEditMode = false;
   articleId: string | null = null;
 
@@ -43,19 +48,32 @@ export class CreateArticleComponent implements OnInit {
     this.isEditMode = !!this.articleId;
 
     if (this.isEditMode && this.articleId) {
+      this.userService.getUserProfile().subscribe({
+        next: (response: UserProfileResponse) => {
+          this.userProfile = response;
+        },
+        error: (error) => {
+          this.notificationService.error(error.error.message);
+        },
+      });
+
       this.articleService.getArticleById(this.articleId).subscribe({
         next: (response: GetArticleById) => {
-          const article = response.data;
+          this.article = response;
 
+          if (this.userProfile?.data.username !== this.article.data.author) {
+            this.notificationService.error('You can only edit your own articles');
+            this.router.navigate([APP_ROUTES.DASHBOARD.BASE]);
+          }
           this.tags.clear();
 
-          if (article.tags && Array.isArray(article.tags)) {
-            article.tags.forEach((tag: string) => {
+          if (this.article.data.tags && Array.isArray(this.article.data.tags)) {
+            this.article.data.tags.forEach((tag: string) => {
               this.tags.push(new FormControl(tag));
             });
           }
 
-          this.articleForm.patchValue(article);
+          this.articleForm.patchValue(this.article.data);
         },
         error: (error) => {
           this.notificationService.error(error.error?.message || 'Failed to fetch article data');
@@ -102,5 +120,9 @@ export class CreateArticleComponent implements OnInit {
         },
       });
     }
+    this.router.navigate([APP_ROUTES.DASHBOARD.MY_ARTICLES]);
+  }
+  onCancel(): void {
+    this.router.navigate([APP_ROUTES.DASHBOARD.MY_ARTICLES]);
   }
 }

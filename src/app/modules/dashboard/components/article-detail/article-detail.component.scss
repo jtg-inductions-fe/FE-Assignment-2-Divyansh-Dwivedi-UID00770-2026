@@ -19,7 +19,7 @@
   }
 
   &__title {
-    @extend .article-detail;
+    @extend .article-title;
 
     margin: 0 0 rem(12);
     color: $color-title-black;
@@ -50,4 +50,11 @@
     margin: 0;
     color: $color-light-black;
   }
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

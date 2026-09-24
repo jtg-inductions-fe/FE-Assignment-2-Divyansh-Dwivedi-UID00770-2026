@@ -2,8 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { APP_ROUTES } from '@core/constants/app-routes';
-import { STORAGE_KEYS } from '@core/constants/storage-keys';
-
 import {
   Article,
   DeleteArticleResponse,
@@ -22,7 +20,6 @@ export class MyArticlesComponent implements OnInit {
   private readonly notificationService = inject(NotificationService);
   private readonly router = inject(Router);
   protected readonly APP_ROUTES = APP_ROUTES;
-  private readonly user = JSON.parse(localStorage.getItem(STORAGE_KEYS.USER) || 'null');
 
   articles: Article[] = [];
   isLoading = true;

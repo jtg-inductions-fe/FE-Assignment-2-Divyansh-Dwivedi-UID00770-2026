@@ -3,10 +3,11 @@
 
 .header {
   background-color: $color-text-white;
-  color: #000;
+  color: $color-header-black;
   height: rem(65);
   border-bottom: 1px solid $color-border-white;
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 100; 
 
   &__brand {
@@ -20,11 +21,10 @@
   &__logo {
     height: rem(32);
     width: rem(32);
-    fill: #000;
+    fill: $color-header-black;
   }
 
   &__title {
-    font-family: Roboto, Arial, Helvetica, sans-serif;
     font-size: 1.6rem;
     font-weight: 700;
   }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MyArticlesComponent } from './components/my-articles/my-articles.component';
-import { CreateArticleComponent } from './components/create-article/create-article.component';
+import { CreateUpdateArticleComponent } from './components/create-article/create-update-article.component';
 import { DashboardComponent } from './dashboard.component';
 import { ArticleDetailComponent } from './components/article-detail/article-detail.component';
 
@@ -21,11 +21,11 @@ const routes: Routes = [
   },
   {
     path: 'create-article',
-    component: CreateArticleComponent,
+    component: CreateUpdateArticleComponent,
   },
   {
     path: 'update-article/:id',
-    component: CreateArticleComponent,
+    component: CreateUpdateArticleComponent,
   },
 ];
 

@@ -105,10 +105,20 @@
       mat-raised-button
       color="primary"
       type="submit"
-      [disabled]="articleForm.invalid"
+      [disabled]="articleForm.invalid || tags.length === 0"
     >
       {{ isEditMode ? 'Update Article' : 'Create Article' }}
     </button>
+    <a
+      class="article-form__button"
+      mat-raised-button
+      color="warn"
+      (click)="onCancel()"
+      (keydown.enter)="onCancel()"
+      tabindex="0"
+    >
+      Cancel
+    </a>
   </form>
 </div>
 

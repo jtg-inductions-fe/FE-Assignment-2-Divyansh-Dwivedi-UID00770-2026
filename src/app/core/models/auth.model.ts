@@ -11,15 +11,15 @@ export interface User {
   updatedAt: string;
 }
 
-export interface LoginResponseData {
+export interface AuthResponseData {
   user: User;
   token: string;
 }
 
-export interface LoginResponse {
+export interface AuthResponse {
   success: boolean;
   message: string;
-  data: LoginResponseData;
+  data: AuthResponseData;
   timestamp: string;
 }
 
@@ -27,16 +27,4 @@ export interface RegisterRequest {
   username: string;
   email: string;
   password: string;
-}
-
-export interface RegisterResponse {
-  success: boolean;
-  message: string;
-  data: RegisterResponseData;
-  timestamp: string;
-}
-
-export interface RegisterResponseData {
-  user: User;
-  token: string;
 }
