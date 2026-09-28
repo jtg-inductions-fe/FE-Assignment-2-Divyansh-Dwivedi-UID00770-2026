@@ -7,7 +7,7 @@
   }
 </div>
 
-<a [routerLink]="APP_ROUTES.DASHBOARD.BASE" class="my-articles__back-link">
+<a (click)="goBack()" (keydown.enter)="goBack()" tabindex="0" class="my-articles__back-link">
   <mat-icon>arrow_back</mat-icon>
   <span>Back</span>
 </a>
@@ -17,28 +17,12 @@
     <div class="card-container">
       <app-article-card
         [article]="article"
+        [showActions]="true"
+        (update)="updateArticle(article.id)"
+        (delete)="deleteCurrentArticle(article.id)"
         [routerLink]="[APP_ROUTES.DASHBOARD.ARTICLE, article.id]"
       >
       </app-article-card>
-      <div class="card-actions">
-        <a
-          mat-button
-          color="primary"
-          (click)="updateArticle(article.id)"
-          (keydown.enter)="updateArticle(article.id)"
-          tabindex="0"
-        >
-          <mat-icon>edit</mat-icon> Update
-        </a>
-        <button
-          mat-button
-          color="warn"
-          class="card-actions__delete"
-          (click)="deleteCurrentArticle(article.id)"
-        >
-          <mat-icon>delete</mat-icon> Delete
-        </button>
-      </div>
     </div>
   }
 </div>

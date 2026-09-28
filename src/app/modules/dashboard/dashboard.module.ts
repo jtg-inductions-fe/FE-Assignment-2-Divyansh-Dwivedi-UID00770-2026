@@ -18,7 +18,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { MyArticlesComponent } from './components/my-articles/my-articles.component';
 import { ArticleDetailComponent } from './components/article-detail/article-detail.component';
-import { CreateUpdateArticleComponent } from './components/create-article/create-update-article.component';
+import { CreateUpdateArticleComponent } from './components/create-update-article/create-update-article.component';
 
 @NgModule({
   declarations: [

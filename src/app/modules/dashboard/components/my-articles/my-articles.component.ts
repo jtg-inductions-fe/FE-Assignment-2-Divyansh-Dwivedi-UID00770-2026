@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { APP_ROUTES } from '@core/constants/app-routes';
 import {
@@ -20,6 +21,7 @@ export class MyArticlesComponent implements OnInit {
   private readonly notificationService = inject(NotificationService);
   private readonly router = inject(Router);
   protected readonly APP_ROUTES = APP_ROUTES;
+  private readonly location = inject(Location);
 
   articles: Article[] = [];
   isLoading = true;
@@ -55,5 +57,9 @@ export class MyArticlesComponent implements OnInit {
 
   updateArticle(articleId: string): void {
     this.router.navigate([APP_ROUTES.DASHBOARD.UPDATE_ARTICLE, articleId]);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

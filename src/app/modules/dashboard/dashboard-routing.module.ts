@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MyArticlesComponent } from './components/my-articles/my-articles.component';
-import { CreateUpdateArticleComponent } from './components/create-article/create-update-article.component';
+import { CreateUpdateArticleComponent } from './components/create-update-article/create-update-article.component';
 import { DashboardComponent } from './dashboard.component';
 import { ArticleDetailComponent } from './components/article-detail/article-detail.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'dashboard',
     component: DashboardComponent,
   },
   {

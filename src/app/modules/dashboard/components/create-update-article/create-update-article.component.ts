@@ -105,6 +105,7 @@ export class CreateUpdateArticleComponent implements OnInit {
       this.articleService.updateArticle(this.articleId, requestData).subscribe({
         next: (response: CreateArticleResponse) => {
           this.notificationService.success(response.message);
+          this.router.navigate([APP_ROUTES.DASHBOARD.MY_ARTICLES]);
         },
         error: (error) => {
           this.notificationService.error(error.error.message);
@@ -114,15 +115,34 @@ export class CreateUpdateArticleComponent implements OnInit {
       this.articleService.createArticle(requestData).subscribe({
         next: (response: CreateArticleResponse) => {
           this.notificationService.success(response.message);
+          this.router.navigate([APP_ROUTES.DASHBOARD.MY_ARTICLES]);
         },
         error: (error) => {
           this.notificationService.error(error.error.message);
         },
       });
     }
-    this.router.navigate([APP_ROUTES.DASHBOARD.MY_ARTICLES]);
   }
+
   onCancel(): void {
     this.router.navigate([APP_ROUTES.DASHBOARD.MY_ARTICLES]);
+  }
+
+  fileName = '';
+
+  onImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (!file) return;
+    this.fileName = file.name;
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const base64 = reader.result as string;
+      this.articleForm.controls.image.setValue(base64);
+    };
+
+    reader.readAsDataURL(file);
   }
 }

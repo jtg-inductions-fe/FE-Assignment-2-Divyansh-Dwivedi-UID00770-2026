@@ -70,11 +70,12 @@
     <div class="article-form__group">
       <mat-form-field appearance="outline" class="article-form__group-box">
         <mat-label>Feature Image</mat-label>
-        <input
-          matInput
-          formControlName="image"
-          placeholder="Insert a feature image for your article"
-        />
+        <input matInput [value]="fileName" placeholder="Select a feature image" readonly />
+
+        <input #fileInput type="file" accept="image/*" hidden (change)="onImageSelected($event)" />
+        <button mat-raised-button color="primary" type="button" (click)="fileInput.click()">
+          Upload
+        </button>
         @if (articleForm.controls.image.hasError('required')) {
           <mat-error>Image is required</mat-error>
         }

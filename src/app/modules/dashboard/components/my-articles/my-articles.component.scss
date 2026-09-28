@@ -12,13 +12,14 @@
 .card-container {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .card-actions {
   display: flex;
 
   &__delete {
-    margin-left: auto;
+    margin-left: rem(195);
   }
 }
 
@@ -47,9 +48,9 @@
   align-items: center;
 }
 
-.my-articles__back-link{
+.my-articles__back-link {
   display: flex;
-  margin-bottom: rem(24);
+  margin-top: rem(24);
   color: $color-link-blue;
   text-decoration: none;
   margin-left: rem(70);

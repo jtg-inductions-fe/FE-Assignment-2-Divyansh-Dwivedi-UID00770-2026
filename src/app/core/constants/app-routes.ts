@@ -6,10 +6,10 @@ export const APP_ROUTES = {
   },
   DASHBOARD: {
     BASE: '/dashboard',
-    ARTICLE: '/dashboard/article',
-    MY_ARTICLES: '/dashboard/my-articles',
-    CREATE_ARTICLE: '/dashboard/create-article',
-    UPDATE_ARTICLE: '/dashboard/update-article',
+    ARTICLE: '/article',
+    MY_ARTICLES: '/my-articles',
+    CREATE_ARTICLE: '/create-article',
+    UPDATE_ARTICLE: '/update-article',
   },
   NOT_FOUND: '/not-found',
 } as const;
