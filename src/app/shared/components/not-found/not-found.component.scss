@@ -1,13 +1,15 @@
 @use 'functions' as *;
+@use 'variables' as *;
+@use 'typography' as *;
 
 .error-page {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 90vh;
   width: 100%;
-  background-color: #f8f9fa;
-  color: #333;
+  background-color: $color-not-found-white;
+  color: $color-light-black;
   padding: rem(20);
   box-sizing: border-box;
 
@@ -17,23 +19,22 @@
   }
 
   &__title {
-    font-size: rem(80);
-    font-weight: 900;
+    @extend .not-found-title;
+
     margin: 0;
-    line-height: 1;
-    color: #0056b3;
+    color: $color-not-found-title;
   }
 
   &__subtitle {
-    font-size: rem(24);
-    font-weight: 700;
+    @extend .not-found-subtitle;
+
     margin: 10px 0 20px;
-    color: #212529;
+    color: $color-not-found-subtitle;
   }
 
   &__description {
-    font-size: rem(17);
-    line-height: 1.6;
+    @extend .not-found-description;
+
     color: #6c757d;
     margin-bottom: rem(30);
   }
@@ -43,15 +44,24 @@
     justify-content: center;
     gap: rem(15);
   }
-
 }
 
-@media (width >= 480px) {
+@media (width <= 650px) {
   .error-page__title {
-    font-size: rem(128);
+    font-size: rem(80);
   }
 
   .error-page__subtitle {
-    font-size: rem(32);
+    font-size: rem(20);
+  }
+}
+
+@media (width <= 480px) {
+  .error-page__title {
+    font-size: rem(60);
+  }
+
+  .error-page__subtitle {
+    font-size: rem(15);
   }
 }

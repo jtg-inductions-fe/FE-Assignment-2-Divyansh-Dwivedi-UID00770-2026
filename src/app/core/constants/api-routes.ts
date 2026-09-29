@@ -6,5 +6,6 @@ export const API_ROUTES = {
   },
   ARTICLE: {
     ARTICLES: '/articles',
+    MY_ARTICLES: '/articles/my',
   },
 } as const;

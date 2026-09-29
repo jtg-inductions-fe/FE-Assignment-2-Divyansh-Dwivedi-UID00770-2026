@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +7,4 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'FE-Assignment-2-Divyansh-Dwivedi-UID00770-2026';
-
-  private http = inject(HttpClient);
 }

@@ -5,6 +5,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Article, GetArticlesResponse } from '@core/models/article.model';
 import { ArticleService } from '@core/services/article.service';
 import { NotificationService } from '@core/services/notification.service';
+import { APP_ROUTES } from '@core/constants/app-routes';
 import {
   DEFAULT_PAGE_SIZE,
   DEFAULT_PAGE_SIZE_OPTIONS,
@@ -18,6 +19,7 @@ import {
 export class DashboardComponent implements OnInit {
   private readonly articleService = inject(ArticleService);
   private readonly notificationService = inject(NotificationService);
+  protected readonly APP_ROUTES = APP_ROUTES;
   protected readonly pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS;
   protected readonly defaultPageSize = DEFAULT_PAGE_SIZE;
 

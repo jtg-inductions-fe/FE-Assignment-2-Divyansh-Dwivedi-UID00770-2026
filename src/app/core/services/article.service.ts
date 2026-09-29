@@ -2,7 +2,13 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { GetArticlesResponse } from '@core/models/article.model';
+import {
+  GetArticlesResponse,
+  GetUserArticlesResponse,
+  CreateArticleRequest,
+  ArticleResponse,
+} from '@core/models/article.model';
+
 import { API_ROUTES } from '@core/constants/api-routes';
 
 @Injectable({
@@ -15,5 +21,25 @@ export class ArticleService {
     const params = new HttpParams().set('page', page).set('pageSize', pageSize);
 
     return this.http.get<GetArticlesResponse>(API_ROUTES.ARTICLE.ARTICLES, { params });
+  }
+
+  getUserArticles(): Observable<GetUserArticlesResponse> {
+    return this.http.get<GetUserArticlesResponse>(API_ROUTES.ARTICLE.MY_ARTICLES);
+  }
+
+  getArticleById(id: string): Observable<ArticleResponse> {
+    return this.http.get<ArticleResponse>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`);
+  }
+
+  createArticle(request: CreateArticleRequest): Observable<ArticleResponse> {
+    return this.http.post<ArticleResponse>(API_ROUTES.ARTICLE.ARTICLES, request);
+  }
+
+  deleteArticle(id: string): Observable<ArticleResponse> {
+    return this.http.delete<ArticleResponse>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`);
+  }
+
+  updateArticle(id: string, request: CreateArticleRequest): Observable<ArticleResponse> {
+    return this.http.put<ArticleResponse>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`, request);
   }
 }

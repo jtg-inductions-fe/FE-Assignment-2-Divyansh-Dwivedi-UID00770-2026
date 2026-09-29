@@ -1,23 +1,29 @@
-@if (userProfile) {
+@if (userProfile()) {
   <button class="user-profile" [matMenuTriggerFor]="profileMenu">
     <img
       class="user-profile"
-      src="assets/images/profile1.svg"
+      ngSrc="assets/images/profile1.svg"
+      width="100"
+      height="100"
       alt="User Avatar that opens user specific options"
     />
   </button>
 
   <mat-menu #profileMenu="matMenu">
     <div class="personal-details">
-      <h2 class="personal-details__username">{{ userProfile.data.username }}</h2>
+      <h2 class="personal-details__username">{{ userProfile()!.username }}</h2>
       <span class="personal-details__email">
-        {{ userProfile.data.email }}
+        {{ userProfile()!.email }}
       </span>
     </div>
-    <button mat-menu-item>
+    <a mat-menu-item [routerLink]="APP_ROUTES.DASHBOARD.MY_ARTICLES">
       <mat-icon>article</mat-icon>
       <span>My Articles</span>
-    </button>
+    </a>
+    <a mat-menu-item [routerLink]="APP_ROUTES.DASHBOARD.CREATE_ARTICLE">
+      <mat-icon>article</mat-icon>
+      <span>Create Article</span>
+    </a>
     <button mat-menu-item class="logout-item" (click)="onLogout()">
       <mat-icon>logout</mat-icon>
       <span>Logout</span>

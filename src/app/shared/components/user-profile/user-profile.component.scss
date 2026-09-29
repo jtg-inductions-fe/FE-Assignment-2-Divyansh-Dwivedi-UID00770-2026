@@ -7,9 +7,13 @@
   position: fixed;
   left: 95%;
   bottom: 94%;
-  z-index: 1001;
+  z-index: $z-index-profile;
   width: rem(40);
   height: rem(40);
+
+  &__buttons {
+    display: flex;
+  }
 }
 
 .personal-details {
@@ -17,7 +21,7 @@
   flex-direction: column;
   align-items: center;
   padding: rem(16) rem(20) rem(14);
-  border-bottom: 1px solid $color-faded-white;
+  border-bottom: $border-faded-white;
 
   &__username {
     margin: rem(0);

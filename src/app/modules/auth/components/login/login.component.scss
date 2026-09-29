@@ -4,7 +4,7 @@
 
 .login-container {
   position: absolute;
-  inset:0;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +18,7 @@
   background: $color-text-white;
   padding: rem(30);
   border-radius: rem(8);
-  box-shadow: 0 4px 15px rgb(0 0 0 / 10%);
+  box-shadow: $shadow-small;
 
   &__title {
     text-align: center;
@@ -26,11 +26,11 @@
   }
 
   &__subtitle {
-    @include subtitle; 
+    @extend .form-subtitle;
 
-    color: $color-text-gray;      
+    color: $color-text-gray;
     margin-bottom: rem(24);
-    text-align: center;   
+    text-align: center;
   }
 
   &__group {
@@ -38,8 +38,8 @@
   }
 
   &__group-box {
-      width: 100%;
-    }
+    width: 100%;
+  }
 
   &__button {
     width: 100%;

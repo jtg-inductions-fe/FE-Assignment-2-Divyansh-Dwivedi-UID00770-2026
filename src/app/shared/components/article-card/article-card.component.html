@@ -8,7 +8,7 @@
       <div class="article-tags">
         <mat-chip-set>
           @for (tag of article.tags; track tag) {
-            <mat-chip>
+            <mat-chip class="article-tags__tag">
               {{ tag }}
             </mat-chip>
           }
@@ -25,15 +25,40 @@
     </p>
   </mat-card-content>
 
-  <mat-card-actions class="article-card-actions">
-    <div class="author">
-      <mat-icon>person_outline</mat-icon>
-      <span>{{ article.author }}</span>
-    </div>
+  <mat-card-actions class="card-actions">
+    <div class="card-actions__article-details">
+      <div class="author">
+        <mat-icon>person_outline</mat-icon>
+        <span>{{ article.author }}</span>
+      </div>
 
-    <div class="publish-date">
-      <mat-icon>calendar_today</mat-icon>
-      <span>{{ article.createdAt | date: 'MMM d, yyyy' }}</span>
+      <div class="publish-date">
+        <mat-icon>calendar_today</mat-icon>
+        <span>{{ article.createdAt | date: 'MMM d, yyyy' }}</span>
+      </div>
     </div>
+    @if (showActions) {
+      <div class="card-actions__button">
+        <button
+          mat-icon-button
+          type="button"
+          color="primary"
+          aria-label="Edit article"
+          (click)="update.emit(article)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button
+          mat-icon-button
+          color="warn"
+          type="button"
+          aria-label="Delete article"
+          (click)="onDeleteClick($event, article)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    }
   </mat-card-actions>
 </mat-card>

@@ -3,6 +3,7 @@
   "rules": {
     "at-rule-empty-line-before": null,
     "selector-class-pattern": null,
-    "no-empty-source": null
+    "no-empty-source": null,
+    "scss/at-extend-no-missing-placeholder": null
   }
 }

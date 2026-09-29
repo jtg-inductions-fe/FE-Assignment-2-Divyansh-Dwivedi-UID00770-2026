@@ -12,7 +12,8 @@
     "lint:scss": "stylelint \"src/**/*.scss\" --fix",
     "lint": "eslint . --fix",
     "format:html": "prettier \"src/**/*.html\" --write",
-    "lint:all": "npm run lint && npm run lint:scss && npm run format:html"
+    "format:scss": "prettier \"src/**/*.scss\" --write",
+    "lint:all": "npm run lint && npm run lint:scss && npm run format:html && npm run format:scss"
   },
   "lint-staged": {
     "*.ts": [

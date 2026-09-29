@@ -5,6 +5,7 @@ import { authGuard } from '@core/guards/auth.guard';
 import { guestGuard } from '@core/guards/guest.guard';
 import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 import { APP_ROUTES } from '@core/constants/app-routes';
+import { userProfileResolver } from '@core/resolvers/user-profile.resolver';
 
 const routes: Routes = [
   {
@@ -18,10 +19,11 @@ const routes: Routes = [
     canActivate: [guestGuard],
   },
   {
-    path: 'dashboard',
+    path: '',
     loadChildren: () =>
       import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule),
     canActivate: [authGuard],
+    resolve: { userProfile: userProfileResolver },
   },
   {
     path: '**',

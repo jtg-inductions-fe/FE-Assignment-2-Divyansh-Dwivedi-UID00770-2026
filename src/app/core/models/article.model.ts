@@ -24,3 +24,24 @@ export interface Article {
   updatedAt: string;
   tags: string[];
 }
+
+export interface GetUserArticlesResponse {
+  success: boolean;
+  data: Article[];
+  timestamp: string;
+}
+
+export interface CreateArticleRequest {
+  title: string;
+  shortDescription: string;
+  description: string;
+  image: string;
+  tags: string[];
+}
+
+export interface ArticleResponse {
+  success: boolean;
+  message: string;
+  data: Article;
+  timestamp: string;
+}
