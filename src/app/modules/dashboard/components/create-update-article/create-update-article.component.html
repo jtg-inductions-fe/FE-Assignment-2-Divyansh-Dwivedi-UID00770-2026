@@ -106,7 +106,7 @@
       mat-raised-button
       color="primary"
       type="submit"
-      [disabled]="articleForm.invalid || tags.length === 0"
+      [disabled]="articleForm.invalid || tags.length === 0 || tags.length > 10"
     >
       {{ isEditMode ? 'Update Article' : 'Create Article' }}
     </button>
@@ -114,9 +114,7 @@
       class="article-form__button"
       mat-raised-button
       color="warn"
-      (click)="onCancel()"
-      (keydown.enter)="onCancel()"
-      tabindex="0"
+      [routerLink]="APP_ROUTES.DASHBOARD.MY_ARTICLES"
     >
       Cancel
     </a>

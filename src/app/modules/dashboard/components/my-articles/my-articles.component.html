@@ -7,10 +7,10 @@
   }
 </div>
 
-<a (click)="goBack()" (keydown.enter)="goBack()" tabindex="0" class="my-articles__back-link">
+<button mat-button (click)="goBack()" class="my-articles__back-button">
   <mat-icon>arrow_back</mat-icon>
   <span>Back</span>
-</a>
+</button>
 
 <div class="article-grid">
   @for (article of articles; track article) {

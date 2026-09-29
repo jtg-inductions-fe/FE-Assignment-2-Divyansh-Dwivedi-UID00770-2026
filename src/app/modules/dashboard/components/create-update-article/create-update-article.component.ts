@@ -4,15 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 import { ArticleService } from '@core/services/article.service';
-import { UserProfileResponse } from '@core/models/user.model';
-import { UserService } from '@core/services/user.service';
+import { UserStore } from '@core/services/user-store.service';
 import { NotificationService } from '@core/services/notification.service';
 import { APP_ROUTES } from '@core/constants/app-routes';
-import {
-  CreateArticleRequest,
-  CreateArticleResponse,
-  GetArticleById,
-} from '@core/models/article.model';
+import { CreateArticleRequest, ArticleResponse } from '@core/models/article.model';
 
 @Component({
   selector: 'app-create-update-article',
@@ -23,20 +18,29 @@ export class CreateUpdateArticleComponent implements OnInit {
   private readonly articleService = inject(ArticleService);
   private readonly notificationService = inject(NotificationService);
   private readonly route = inject(ActivatedRoute);
-  private readonly userService = inject(UserService);
+  private readonly userStore = inject(UserStore);
   private readonly router = inject(Router);
+  protected readonly APP_ROUTES = APP_ROUTES;
 
-  userProfile?: UserProfileResponse;
-  article?: GetArticleById;
+  article?: ArticleResponse;
   isEditMode = false;
   articleId: string | null = null;
 
   articleForm = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    shortDescription: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    description: new FormControl('', [Validators.required, Validators.minLength(50)]),
-    image: new FormControl('', [Validators.required]),
-    tags: new FormArray<FormControl<string | null>>([]),
+    title: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(5)],
+      nonNullable: true,
+    }),
+    shortDescription: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(10)],
+      nonNullable: true,
+    }),
+    description: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(50)],
+      nonNullable: true,
+    }),
+    image: new FormControl('', { validators: [Validators.required], nonNullable: true }),
+    tags: new FormArray<FormControl<string>>([]),
   });
 
   get tags() {
@@ -48,20 +52,12 @@ export class CreateUpdateArticleComponent implements OnInit {
     this.isEditMode = !!this.articleId;
 
     if (this.isEditMode && this.articleId) {
-      this.userService.getUserProfile().subscribe({
-        next: (response: UserProfileResponse) => {
-          this.userProfile = response;
-        },
-        error: (error) => {
-          this.notificationService.error(error.error.message);
-        },
-      });
-
       this.articleService.getArticleById(this.articleId).subscribe({
-        next: (response: GetArticleById) => {
+        next: (response: ArticleResponse) => {
           this.article = response;
 
-          if (this.userProfile?.data.username !== this.article.data.author) {
+          const currentUser = this.userStore.userProfile();
+          if (currentUser?.username !== this.article.data.author) {
             this.notificationService.error('You can only edit your own articles');
             this.router.navigate([APP_ROUTES.DASHBOARD.BASE]);
           }
@@ -99,33 +95,22 @@ export class CreateUpdateArticleComponent implements OnInit {
       return;
     }
 
-    const requestData = this.articleForm.value as CreateArticleRequest;
+    const requestData: CreateArticleRequest = this.articleForm.getRawValue();
 
-    if (this.isEditMode && this.articleId) {
-      this.articleService.updateArticle(this.articleId, requestData).subscribe({
-        next: (response: CreateArticleResponse) => {
-          this.notificationService.success(response.message);
-          this.router.navigate([APP_ROUTES.DASHBOARD.MY_ARTICLES]);
-        },
-        error: (error) => {
-          this.notificationService.error(error.error.message);
-        },
-      });
-    } else {
-      this.articleService.createArticle(requestData).subscribe({
-        next: (response: CreateArticleResponse) => {
-          this.notificationService.success(response.message);
-          this.router.navigate([APP_ROUTES.DASHBOARD.MY_ARTICLES]);
-        },
-        error: (error) => {
-          this.notificationService.error(error.error.message);
-        },
-      });
-    }
-  }
+    const articleAction$ =
+      this.isEditMode && this.articleId
+        ? this.articleService.updateArticle(this.articleId, requestData)
+        : this.articleService.createArticle(requestData);
 
-  onCancel(): void {
-    this.router.navigate([APP_ROUTES.DASHBOARD.MY_ARTICLES]);
+    articleAction$.subscribe({
+      next: (response: ArticleResponse) => {
+        this.notificationService.success(response.message);
+        this.router.navigate([APP_ROUTES.DASHBOARD.MY_ARTICLES]);
+      },
+      error: (error) => {
+        this.notificationService.error(error.error.message);
+      },
+    });
   }
 
   fileName = '';

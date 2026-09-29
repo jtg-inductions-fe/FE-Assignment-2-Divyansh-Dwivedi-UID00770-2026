@@ -9,10 +9,10 @@
 
 @if (article) {
   <div class="article-detail">
-    <a (click)="goBack()" (keydown.enter)="goBack()" tabindex="0" class="article-detail__back-link">
+    <button mat-button (click)="goBack()" class="article-detail__back-button">
       <mat-icon>arrow_back</mat-icon>
       <span>Back</span>
-    </a>
+    </button>
 
     <h1 class="article-detail__title">
       {{ article.title }}

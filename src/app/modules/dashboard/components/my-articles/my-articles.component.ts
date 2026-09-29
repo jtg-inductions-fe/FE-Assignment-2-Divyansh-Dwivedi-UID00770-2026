@@ -3,11 +3,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { APP_ROUTES } from '@core/constants/app-routes';
-import {
-  Article,
-  DeleteArticleResponse,
-  GetUserArticlesResponse,
-} from '@core/models/article.model';
+import { Article, ArticleResponse, GetUserArticlesResponse } from '@core/models/article.model';
 import { ArticleService } from '@core/services/article.service';
 import { NotificationService } from '@core/services/notification.service';
 
@@ -44,8 +40,13 @@ export class MyArticlesComponent implements OnInit {
   }
 
   deleteCurrentArticle(articleId: string): void {
+    const hasConfirmed = window.confirm('Are you sure you want to delete this article?');
+    if (!hasConfirmed) {
+      return;
+    }
+
     this.articleService.deleteArticle(articleId).subscribe({
-      next: (response: DeleteArticleResponse) => {
+      next: (response: ArticleResponse) => {
         this.notificationService.success(response.message);
         this.articles = this.articles.filter((article) => article.id !== articleId);
       },

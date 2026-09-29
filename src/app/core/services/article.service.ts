@@ -5,10 +5,8 @@ import { Observable } from 'rxjs';
 import {
   GetArticlesResponse,
   GetUserArticlesResponse,
-  GetArticleById,
   CreateArticleRequest,
-  CreateArticleResponse,
-  DeleteArticleResponse,
+  ArticleResponse,
 } from '@core/models/article.model';
 
 import { API_ROUTES } from '@core/constants/api-routes';
@@ -29,19 +27,19 @@ export class ArticleService {
     return this.http.get<GetUserArticlesResponse>(API_ROUTES.ARTICLE.MY_ARTICLES);
   }
 
-  getArticleById(id: string): Observable<GetArticleById> {
-    return this.http.get<GetArticleById>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`);
+  getArticleById(id: string): Observable<ArticleResponse> {
+    return this.http.get<ArticleResponse>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`);
   }
 
-  createArticle(request: CreateArticleRequest): Observable<CreateArticleResponse> {
-    return this.http.post<CreateArticleResponse>(API_ROUTES.ARTICLE.ARTICLES, request);
+  createArticle(request: CreateArticleRequest): Observable<ArticleResponse> {
+    return this.http.post<ArticleResponse>(API_ROUTES.ARTICLE.ARTICLES, request);
   }
 
-  deleteArticle(id: string): Observable<DeleteArticleResponse> {
-    return this.http.delete<DeleteArticleResponse>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`);
+  deleteArticle(id: string): Observable<ArticleResponse> {
+    return this.http.delete<ArticleResponse>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`);
   }
 
-  updateArticle(id: string, request: CreateArticleRequest): Observable<CreateArticleResponse> {
-    return this.http.put<CreateArticleResponse>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`, request);
+  updateArticle(id: string, request: CreateArticleRequest): Observable<ArticleResponse> {
+    return this.http.put<ArticleResponse>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`, request);
   }
 }

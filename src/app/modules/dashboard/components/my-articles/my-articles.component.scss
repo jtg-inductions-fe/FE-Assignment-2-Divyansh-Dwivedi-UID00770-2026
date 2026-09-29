@@ -23,19 +23,19 @@
   }
 }
 
-@media (width <= rem(1200)) {
+@media (width <= 1400px) {
   .article-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (width <= rem(900)) {
+@media (width <= 1000px) {
   .article-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (width <= rem(600)) {
+@media (width <= 750px) {
   .article-grid {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -48,7 +48,7 @@
   align-items: center;
 }
 
-.my-articles__back-link {
+.my-articles__back-button {
   display: flex;
   margin-top: rem(24);
   color: $color-link-blue;

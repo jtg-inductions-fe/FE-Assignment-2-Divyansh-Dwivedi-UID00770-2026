@@ -8,7 +8,7 @@
       <div class="article-tags">
         <mat-chip-set>
           @for (tag of article.tags; track tag) {
-            <mat-chip class="article-content__tag">
+            <mat-chip class="article-tags__tag">
               {{ tag }}
             </mat-chip>
           }
@@ -38,7 +38,7 @@
       </div>
     </div>
     @if (showActions) {
-      <div class="card-actions-button">
+      <div class="card-actions__button">
         <button
           mat-icon-button
           type="button"

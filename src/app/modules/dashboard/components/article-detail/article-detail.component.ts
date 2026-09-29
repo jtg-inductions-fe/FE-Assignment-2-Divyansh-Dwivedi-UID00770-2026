@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Article, GetArticleById } from '@core/models/article.model';
+import { Article, ArticleResponse } from '@core/models/article.model';
 import { ArticleService } from '@core/services/article.service';
 import { APP_ROUTES } from '@core/constants/app-routes';
 
@@ -30,7 +30,7 @@ export class ArticleDetailComponent implements OnInit {
     const articleId = this.route.snapshot.paramMap.get('id');
 
     this.articleService.getArticleById(articleId!).subscribe({
-      next: (response: GetArticleById) => {
+      next: (response: ArticleResponse) => {
         this.article = response.data;
         this.isLoading = false;
       },

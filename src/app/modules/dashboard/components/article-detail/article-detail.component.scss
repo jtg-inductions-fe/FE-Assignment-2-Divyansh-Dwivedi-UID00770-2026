@@ -7,11 +7,12 @@
   margin: rem(40) auto;
   padding: 0 rem(24) rem(60);
 
-  &__back-link {
+  &__back-button {
     display: flex;
     margin-bottom: rem(24);
     color: $color-link-blue;
     text-decoration: none;
+    border: none;
 
     &:hover {
       text-decoration: underline;
@@ -37,7 +38,7 @@
     width: 100%;
     max-height: rem(500);
     margin-bottom: rem(32);
-    border-radius: 12px;
+    border-radius: rem(12);
   }
 
   &__content {

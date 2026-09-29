@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 import { APP_ROUTES } from '@core/constants/app-routes';
-// import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-header',

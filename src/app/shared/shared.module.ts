@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -22,7 +22,18 @@ import { ArticleCardComponent } from './components/article-card/article-card.com
     MatCardModule,
     MatChipsModule,
     MatButtonModule,
+    NgOptimizedImage,
   ],
-  exports: [NotFoundComponent, CommonModule, UserProfileComponent, ArticleCardComponent],
+  exports: [
+    CommonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatChipsModule,
+    MatButtonModule,
+    NgOptimizedImage,
+    NotFoundComponent,
+    UserProfileComponent,
+    ArticleCardComponent,
+  ],
 })
 export class SharedModule {}

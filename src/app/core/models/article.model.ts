@@ -31,13 +31,6 @@ export interface GetUserArticlesResponse {
   timestamp: string;
 }
 
-export interface GetArticleById {
-  success: boolean;
-  message: string;
-  data: Article;
-  timestamp: string;
-}
-
 export interface CreateArticleRequest {
   title: string;
   shortDescription: string;
@@ -46,15 +39,9 @@ export interface CreateArticleRequest {
   tags: string[];
 }
 
-export interface CreateArticleResponse {
+export interface ArticleResponse {
   success: boolean;
   message: string;
   data: Article;
-  timestamp: string;
-}
-export interface DeleteArticleResponse {
-  success: boolean;
-  message: string;
-  data: null;
   timestamp: string;
 }
