@@ -7,6 +7,7 @@ import {
   GetUserArticlesResponse,
   CreateArticleRequest,
   ArticleResponse,
+  ArticleResponseData,
 } from '@core/models/article.model';
 
 import { API_ROUTES } from '@core/constants/api-routes';
@@ -17,29 +18,57 @@ import { API_ROUTES } from '@core/constants/api-routes';
 export class ArticleService {
   private readonly http = inject(HttpClient);
 
-  getArticles(page = 1, pageSize = 20): Observable<GetArticlesResponse> {
-    const params = new HttpParams().set('page', page).set('pageSize', pageSize);
+  getArticles(
+    page = 1,
+    pageSize = 20,
+    search = '',
+    tag = '',
+    author = ''
+  ): Observable<GetArticlesResponse> {
+    let params = new HttpParams().set('page', page).set('pageSize', pageSize);
+    if (search) {
+      params = params.set('search', search);
+    }
+    if (tag) {
+      params = params.set('tag', tag);
+    }
+    if (author) {
+      params = params.set('author', author);
+    }
 
     return this.http.get<GetArticlesResponse>(API_ROUTES.ARTICLE.ARTICLES, { params });
   }
 
-  getUserArticles(): Observable<GetUserArticlesResponse> {
-    return this.http.get<GetUserArticlesResponse>(API_ROUTES.ARTICLE.MY_ARTICLES);
+  getUserArticles(
+    page = 1,
+    pageSize = 20,
+    search = '',
+    tag = ''
+  ): Observable<GetUserArticlesResponse> {
+    let params = new HttpParams().set('page', page).set('pageSize', pageSize);
+    if (search) {
+      params = params.set('search', search);
+    }
+    if (tag) {
+      params = params.set('tag', tag);
+    }
+
+    return this.http.get<GetUserArticlesResponse>(API_ROUTES.ARTICLE.MY_ARTICLES, { params });
   }
 
-  getArticleById(id: string): Observable<ArticleResponse> {
-    return this.http.get<ArticleResponse>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`);
+  getArticleById(id: number): Observable<ArticleResponseData> {
+    return this.http.get<ArticleResponseData>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`);
   }
 
-  createArticle(request: CreateArticleRequest): Observable<ArticleResponse> {
-    return this.http.post<ArticleResponse>(API_ROUTES.ARTICLE.ARTICLES, request);
+  createArticle(request: CreateArticleRequest): Observable<ArticleResponseData> {
+    return this.http.post<ArticleResponseData>(API_ROUTES.ARTICLE.ARTICLES, request);
   }
 
-  deleteArticle(id: string): Observable<ArticleResponse> {
+  deleteArticle(id: number): Observable<ArticleResponse> {
     return this.http.delete<ArticleResponse>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`);
   }
 
-  updateArticle(id: string, request: CreateArticleRequest): Observable<ArticleResponse> {
-    return this.http.put<ArticleResponse>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`, request);
+  updateArticle(id: number, request: CreateArticleRequest): Observable<ArticleResponseData> {
+    return this.http.patch<ArticleResponseData>(`${API_ROUTES.ARTICLE.ARTICLES}/${id}`, request);
   }
 }

@@ -4,10 +4,10 @@
   </div>
 
   <mat-card-content class="article-content">
-    @if (article.tags.length) {
+    @if (article.tagList.length) {
       <div class="article-tags">
         <mat-chip-set>
-          @for (tag of article.tags; track tag) {
+          @for (tag of article.tagList; track tag) {
             <mat-chip class="article-tags__tag">
               {{ tag }}
             </mat-chip>
@@ -21,7 +21,7 @@
     </h2>
 
     <p class="article-description">
-      {{ article.shortDescription }}
+      {{ article.description }}
     </p>
   </mat-card-content>
 
@@ -29,7 +29,7 @@
     <div class="card-actions__article-details">
       <div class="author">
         <mat-icon>person_outline</mat-icon>
-        <span>{{ article.author }}</span>
+        <span>{{ article.author.username }}</span>
       </div>
 
       <div class="publish-date">

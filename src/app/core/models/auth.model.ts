@@ -1,30 +1,36 @@
 export interface LoginRequest {
-  username: string;
+  email: string;
   password: string;
 }
 
-export interface User {
+export interface LoginResponse {
+  token: TokenInfo;
+  user: UserResponse;
+}
+
+export interface TokenInfo {
+  key: string;
+  expiryTime: string;
+}
+
+export interface UserResponse {
   id: number;
-  username: string;
   email: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface AuthResponseData {
-  user: User;
-  token: string;
-}
-
-export interface AuthResponse {
-  success: boolean;
-  message: string;
-  data: AuthResponseData;
-  timestamp: string;
+  firstName: string;
+  lastModified: string;
 }
 
 export interface RegisterRequest {
   username: string;
   email: string;
   password: string;
+}
+
+export interface RegisterResponse {
+  token: TokenInfo;
+  user: UserResponse;
+}
+
+export interface LogoutResponse {
+  status: boolean;
 }

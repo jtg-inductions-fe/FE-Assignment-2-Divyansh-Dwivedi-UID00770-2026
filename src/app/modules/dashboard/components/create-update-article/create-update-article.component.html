@@ -25,33 +25,11 @@
 
     <div class="article-form__group">
       <mat-form-field appearance="outline" class="article-form__group-box">
-        <mat-label>Short Description</mat-label>
-        <textarea
-          matInput
-          formControlName="shortDescription"
-          placeholder="Enter short description for your article"
-          cdkTextareaAutosize
-        >
-        </textarea>
-
-        <mat-error>
-          <ng-container
-            *ngTemplateOutlet="
-              shortDescriptionErrors;
-              context: { $implicit: articleForm.controls.shortDescription }
-            "
-          ></ng-container>
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="article-form__group">
-      <mat-form-field appearance="outline" class="article-form__group-box">
         <mat-label>Description</mat-label>
         <textarea
           matInput
           formControlName="description"
-          placeholder="Enter the description for your article"
+          placeholder="Enter description for your article"
           cdkTextareaAutosize
         >
         </textarea>
@@ -62,6 +40,25 @@
               descriptionErrors;
               context: { $implicit: articleForm.controls.description }
             "
+          ></ng-container>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="article-form__group">
+      <mat-form-field appearance="outline" class="article-form__group-box">
+        <mat-label>Body</mat-label>
+        <textarea
+          matInput
+          formControlName="body"
+          placeholder="Enter the body for your article"
+          cdkTextareaAutosize
+        >
+        </textarea>
+
+        <mat-error>
+          <ng-container
+            *ngTemplateOutlet="bodyErrors; context: { $implicit: articleForm.controls.body }"
           ></ng-container>
         </mat-error>
       </mat-form-field>
@@ -86,7 +83,7 @@
       <mat-form-field appearance="outline" class="article-form__group-box">
         <mat-label>Tags</mat-label>
         <mat-chip-grid #chipGrid>
-          @for (tag of tags.value; track $index) {
+          @for (tag of tagList.value; track $index) {
             <mat-chip-row (removed)="removeTag($index)">
               {{ tag }}
               <button matChipRemove><mat-icon>cancel</mat-icon></button>
@@ -106,7 +103,7 @@
       mat-raised-button
       color="primary"
       type="submit"
-      [disabled]="articleForm.invalid || tags.length === 0 || tags.length > 10"
+      [disabled]="articleForm.invalid || tagList.length === 0 || tagList.length > 10"
     >
       {{ isEditMode ? 'Update Article' : 'Create Article' }}
     </button>
@@ -129,18 +126,18 @@
   }
 </ng-template>
 
-<ng-template #shortDescriptionErrors let-control>
-  @if (control.hasError('required')) {
-    Short Description is required
-  } @else if (control.hasError('minlength')) {
-    Short Description must be at least 10 characters
-  }
-</ng-template>
-
 <ng-template #descriptionErrors let-control>
   @if (control.hasError('required')) {
     Description is required
   } @else if (control.hasError('minlength')) {
-    Description must be at least 50 characters
+    Description must be at least 10 characters
+  }
+</ng-template>
+
+<ng-template #bodyErrors let-control>
+  @if (control.hasError('required')) {
+    Body is required
+  } @else if (control.hasError('minlength')) {
+    Body must be at least 50 characters
   }
 </ng-template>

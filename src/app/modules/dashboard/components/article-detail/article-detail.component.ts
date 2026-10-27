@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Article, ArticleResponse } from '@core/models/article.model';
+import { Article, ArticleResponseData } from '@core/models/article.model';
 import { ArticleService } from '@core/services/article.service';
 import { APP_ROUTES } from '@core/constants/app-routes';
 
@@ -19,6 +19,7 @@ export class ArticleDetailComponent implements OnInit {
   private readonly location = inject(Location);
 
   isLoading = true;
+  articleId = 1;
 
   article: Article | null = null;
 
@@ -27,11 +28,12 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   private loadArticle(): void {
-    const articleId = this.route.snapshot.paramMap.get('id');
+    const idParam = this.route.snapshot.paramMap.get('id');
+    this.articleId = idParam ? Number(idParam) : 1;
 
-    this.articleService.getArticleById(articleId!).subscribe({
-      next: (response: ArticleResponse) => {
-        this.article = response.data;
+    this.articleService.getArticleById(this.articleId).subscribe({
+      next: (response: ArticleResponseData) => {
+        this.article = response;
         this.isLoading = false;
       },
       error: () => {

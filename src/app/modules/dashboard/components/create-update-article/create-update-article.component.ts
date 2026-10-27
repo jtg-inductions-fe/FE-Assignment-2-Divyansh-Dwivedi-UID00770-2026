@@ -7,7 +7,7 @@ import { ArticleService } from '@core/services/article.service';
 import { UserStore } from '@core/services/user-store.service';
 import { NotificationService } from '@core/services/notification.service';
 import { APP_ROUTES } from '@core/constants/app-routes';
-import { CreateArticleRequest, ArticleResponse } from '@core/models/article.model';
+import { CreateArticleRequest, ArticleResponseData } from '@core/models/article.model';
 
 @Component({
   selector: 'app-create-update-article',
@@ -22,54 +22,61 @@ export class CreateUpdateArticleComponent implements OnInit {
   private readonly router = inject(Router);
   protected readonly APP_ROUTES = APP_ROUTES;
 
-  article?: ArticleResponse;
+  article?: ArticleResponseData;
   isEditMode = false;
-  articleId: string | null = null;
+  articleId?: number;
 
   articleForm = new FormGroup({
     title: new FormControl('', {
       validators: [Validators.required, Validators.minLength(5)],
       nonNullable: true,
     }),
-    shortDescription: new FormControl('', {
+    description: new FormControl('', {
       validators: [Validators.required, Validators.minLength(10)],
       nonNullable: true,
     }),
-    description: new FormControl('', {
+    body: new FormControl('', {
       validators: [Validators.required, Validators.minLength(50)],
       nonNullable: true,
     }),
     image: new FormControl('', { validators: [Validators.required], nonNullable: true }),
-    tags: new FormArray<FormControl<string>>([]),
+    tagList: new FormArray<FormControl<string>>([]),
   });
 
-  get tags() {
-    return this.articleForm.get('tags') as FormArray;
+  get tagList() {
+    return this.articleForm.get('tagList') as FormArray;
   }
 
   ngOnInit(): void {
-    this.articleId = this.route.snapshot.paramMap.get('id');
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if (idParam == null) {
+      return;
+    }
+    if (idParam.trim() == '' || !Number.isInteger(Number(idParam))) {
+      this.router.navigate([APP_ROUTES.DASHBOARD.BASE]);
+    }
+    this.articleId = Number(idParam);
     this.isEditMode = !!this.articleId;
 
     if (this.isEditMode && this.articleId) {
       this.articleService.getArticleById(this.articleId).subscribe({
-        next: (response: ArticleResponse) => {
+        next: (response: ArticleResponseData) => {
           this.article = response;
 
           const currentUser = this.userStore.userProfile();
-          if (currentUser?.username !== this.article.data.author) {
+          if (currentUser?.id !== this.article.author.authorId) {
             this.notificationService.error('You can only edit your own articles');
             this.router.navigate([APP_ROUTES.DASHBOARD.BASE]);
           }
-          this.tags.clear();
+          this.tagList.clear();
 
-          if (this.article.data.tags && Array.isArray(this.article.data.tags)) {
-            this.article.data.tags.forEach((tag: string) => {
-              this.tags.push(new FormControl(tag));
+          if (this.article.tagList && Array.isArray(this.article.tagList)) {
+            this.article.tagList.forEach((tag: string) => {
+              this.tagList.push(new FormControl(tag));
             });
           }
 
-          this.articleForm.patchValue(this.article.data);
+          this.articleForm.patchValue(this.article);
         },
         error: (error) => {
           this.notificationService.error(error.error?.message || 'Failed to fetch article data');
@@ -81,12 +88,12 @@ export class CreateUpdateArticleComponent implements OnInit {
 
   addTag(event: MatChipInputEvent): void {
     const value = event.value.trim();
-    this.tags.push(new FormControl(value));
+    this.tagList.push(new FormControl(value));
     event.chipInput.clear();
   }
 
   removeTag(index: number): void {
-    this.tags.removeAt(index);
+    this.tagList.removeAt(index);
   }
 
   onSubmit(): void {
@@ -103,8 +110,12 @@ export class CreateUpdateArticleComponent implements OnInit {
         : this.articleService.createArticle(requestData);
 
     articleAction$.subscribe({
-      next: (response: ArticleResponse) => {
-        this.notificationService.success(response.message);
+      next: () => {
+        if (this.isEditMode) {
+          this.notificationService.success('Article Updated Successfully');
+        } else {
+          this.notificationService.success('Article Created Successfully');
+        }
         this.router.navigate([APP_ROUTES.DASHBOARD.MY_ARTICLES]);
       },
       error: (error) => {

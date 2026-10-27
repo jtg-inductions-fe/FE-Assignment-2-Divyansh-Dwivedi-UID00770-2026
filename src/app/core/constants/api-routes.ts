@@ -1,8 +1,9 @@
 export const API_ROUTES = {
   USERS: {
-    LOGIN: '/users/login',
-    REGISTER: '/users/register',
-    USER_PROFILE: '/users/profile',
+    LOGIN: '/auth/login',
+    LOGOUT: '/auth/logout',
+    REGISTER: '/auth/register',
+    USER_PROFILE: '/users/me',
   },
   ARTICLE: {
     ARTICLES: '/articles',

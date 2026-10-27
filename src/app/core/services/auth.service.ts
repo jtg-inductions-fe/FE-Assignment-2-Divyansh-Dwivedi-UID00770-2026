@@ -8,7 +8,13 @@ import { API_ROUTES } from '@core/constants/api-routes';
 import { STORAGE_KEYS } from '@core/constants/storage-keys';
 import { UserStore } from '@core/services/user-store.service';
 
-import { LoginRequest, AuthResponse, RegisterRequest } from '@core/models/auth.model';
+import {
+  LoginRequest,
+  LoginResponse,
+  LogoutResponse,
+  RegisterRequest,
+  RegisterResponse,
+} from '@core/models/auth.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,21 +24,21 @@ export class AuthService {
   private readonly router = inject(Router);
   private readonly userStore = inject(UserStore);
 
-  login(request: LoginRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(API_ROUTES.USERS.LOGIN, request).pipe(
+  login(request: LoginRequest): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(API_ROUTES.USERS.LOGIN, request).pipe(
       // used to perform side effects on an observable stream without changing data flow
-      tap((response: AuthResponse) => {
-        localStorage.setItem(STORAGE_KEYS.TOKEN, response.data.token);
-        this.userStore.setUser(response.data.user);
+      tap((response: LoginResponse) => {
+        localStorage.setItem(STORAGE_KEYS.TOKEN, response.token.key);
+        this.userStore.setUser(response.user);
       })
     );
   }
 
-  register(request: RegisterRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(API_ROUTES.USERS.REGISTER, request).pipe(
-      tap((response: AuthResponse) => {
-        localStorage.setItem(STORAGE_KEYS.TOKEN, response.data.token);
-        this.userStore.setUser(response.data.user);
+  register(request: RegisterRequest): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(API_ROUTES.USERS.REGISTER, request).pipe(
+      tap((response: RegisterResponse) => {
+        localStorage.setItem(STORAGE_KEYS.TOKEN, response.token.key);
+        this.userStore.setUser(response.user);
       })
     );
   }
@@ -41,9 +47,13 @@ export class AuthService {
     return localStorage.getItem(STORAGE_KEYS.TOKEN) !== null;
   }
 
-  logout(): void {
-    localStorage.removeItem(STORAGE_KEYS.TOKEN);
-    this.userStore.clearUser();
-    this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
+  logout(): Observable<LogoutResponse> {
+    return this.http.post<LogoutResponse>(API_ROUTES.USERS.LOGOUT, null).pipe(
+      tap(() => {
+        localStorage.removeItem(STORAGE_KEYS.TOKEN);
+        this.userStore.clearUser();
+        this.router.navigate([APP_ROUTES.AUTH.LOGIN]);
+      })
+    );
   }
 }
