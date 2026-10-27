@@ -11,6 +11,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { authInterceptor } from '@core/interceptors/auth.interceptor';
 import { errorInterceptor } from '@core/interceptors/error.interceptor';
 import { apiUrlInterceptor } from '@core/interceptors/api-url.interceptor';
+import { snakeToCamelInterceptor } from '@core/interceptors/snake-to-camel.interceptor';
 
 import { SharedModule } from '@shared/shared.module';
 
@@ -36,7 +37,14 @@ import { HeaderComponent } from './core/components/header/header.component';
         verticalPosition: 'top',
       },
     },
-    provideHttpClient(withInterceptors([apiUrlInterceptor, authInterceptor, errorInterceptor])),
+    provideHttpClient(
+      withInterceptors([
+        apiUrlInterceptor,
+        authInterceptor,
+        errorInterceptor,
+        snakeToCamelInterceptor,
+      ])
+    ),
   ],
   bootstrap: [AppComponent],
 })

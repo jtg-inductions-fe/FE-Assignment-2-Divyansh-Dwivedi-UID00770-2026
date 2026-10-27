@@ -5,19 +5,20 @@
 
     <div class="login-form__group">
       <mat-form-field appearance="outline" class="login-form__group-box">
-        <mat-label>Username</mat-label>
+        <mat-label>Email</mat-label>
 
         <input
           matInput
-          type="text"
-          id="username"
-          formControlName="username"
-          placeholder="Enter your username"
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Enter your email"
         />
-
-        @if (loginForm.controls.username.hasError('required')) {
-          <mat-error>Username is required</mat-error>
-        }
+        <mat-error>
+          <ng-container
+            *ngTemplateOutlet="emailErrors; context: { $implicit: loginForm.controls.email }"
+          ></ng-container>
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -61,3 +62,11 @@
     </span>
   </form>
 </div>
+
+<ng-template #emailErrors let-control>
+  @if (control.hasError('required')) {
+    Email is required
+  } @else if (control.hasError('email')) {
+    Please enter a valid email
+  }
+</ng-template>

@@ -1,6 +1,39 @@
 @use 'functions' as *;
 @use 'variables' as *;
 
+.search-filter-wrapper {
+  display: flex;
+  gap: rem(12);
+  margin: rem(16) auto rem(8);
+  max-width: rem(650);
+  padding: 0 rem(16);
+
+  &__bar {
+    flex: 1;
+  }
+
+  &__button {
+    height: rem(54);
+    display: inline-flex;
+    align-items: center;
+    gap: rem(6);
+    position: relative;
+    border-radius: rem(4);
+    font-weight: 500;
+
+    &.active {
+      color: $color-link-blue;
+      border-color: $color-link-blue;
+    }
+  }
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+
 .article-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -58,4 +91,11 @@
   &:hover {
     text-decoration: underline;
   }
+}
+
+.pagination {
+  bottom: 0;
+  left: 40%;
+  z-index: $z-index-pagination;
+  background: white;
 }

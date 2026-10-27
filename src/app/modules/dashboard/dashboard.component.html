@@ -7,6 +7,23 @@
   }
 </div>
 
+<div class="search-filter-wrapper">
+  <app-search-bar
+    class="search-filter-wrapper__bar"
+    (searchBar)="onSearch($event)"
+  ></app-search-bar>
+  <button
+    mat-stroked-button
+    class="search-filter-wrapper__button"
+    (click)="openFilterDrawer()"
+    [class.active]="hasActiveFilters"
+    aria-label="Open filter options"
+  >
+    <mat-icon>tune</mat-icon>
+    <span>Filters</span>
+  </button>
+</div>
+
 <div class="page-container">
   <div class="article-grid">
     @for (article of articles; track article.id) {
@@ -28,3 +45,12 @@
   >
   </mat-paginator>
 </div>
+
+<app-side-drawer
+  [isOpen]="isFilterDrawerOpen"
+  [currentTag]="tagFilter"
+  [currentAuthor]="authorFilter"
+  (closeDrawer)="closeFilterDrawer()"
+  (applyFilters)="onApplyFilters($event)"
+  (resetFilters)="onResetFilters()"
+></app-side-drawer>

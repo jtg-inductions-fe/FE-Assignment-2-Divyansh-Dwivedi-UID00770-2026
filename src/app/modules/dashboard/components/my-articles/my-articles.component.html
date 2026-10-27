@@ -12,17 +12,55 @@
   <span>Back</span>
 </button>
 
-<div class="article-grid">
-  @for (article of articles; track article) {
-    <div class="card-container">
-      <app-article-card
-        [article]="article"
-        [showActions]="true"
-        (update)="updateArticle(article.id)"
-        (delete)="deleteCurrentArticle(article.id)"
-        [routerLink]="[APP_ROUTES.DASHBOARD.ARTICLE, article.id]"
-      >
-      </app-article-card>
-    </div>
-  }
+<div class="search-filter-wrapper">
+  <app-search-bar
+    class="search-filter-wrapper__bar"
+    (searchBar)="onSearch($event)"
+  ></app-search-bar>
+  <button
+    mat-stroked-button
+    class="search-filter-wrapper__button"
+    (click)="openFilterDrawer()"
+    [class.active]="hasActiveFilters"
+    aria-label="Open filter options"
+  >
+    <mat-icon>tune</mat-icon>
+    <span>Filters</span>
+  </button>
 </div>
+
+<div class="page-container">
+  <div class="article-grid">
+    @for (article of articles; track article.id) {
+      <div class="card-container">
+        <app-article-card
+          [article]="article"
+          [showActions]="true"
+          (update)="updateArticle(article.id)"
+          (delete)="deleteCurrentArticle(article.id)"
+          [routerLink]="[APP_ROUTES.DASHBOARD.ARTICLE, article.id]"
+        >
+        </app-article-card>
+      </div>
+    }
+  </div>
+
+  <mat-paginator
+    class="pagination"
+    [disabled]="isLoading"
+    [length]="totalItems"
+    [pageSize]="defaultPageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</div>
+
+<app-side-drawer
+  [isOpen]="isFilterDrawerOpen"
+  [showAuthor]="false"
+  [currentTag]="tagFilter"
+  (closeDrawer)="closeFilterDrawer()"
+  (applyFilters)="onApplyFilters($event)"
+  (resetFilters)="onResetFilters()"
+></app-side-drawer>

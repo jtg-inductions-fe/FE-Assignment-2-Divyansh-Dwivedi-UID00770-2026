@@ -1,0 +1,76 @@
+@if (isOpen) {
+  <div class="drawer-backdrop" (click)="onClose()"></div>
+}
+
+<aside class="drawer-panel" [class.open]="isOpen" aria-label="Filter Options">
+  <div class="drawer-header">
+    <div class="header-title">
+      <mat-icon>tune</mat-icon>
+      <h2>Filters</h2>
+    </div>
+    <button mat-icon-button (click)="onClose()" aria-label="Close filters">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="drawer-content">
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Tag Name</mat-label>
+      <mat-icon matPrefix>label</mat-icon>
+      <input
+        matInput
+        [formControl]="tagControl"
+        placeholder="Filter by tag..."
+        (keydown.enter)="onApply()"
+      />
+      @if (tagControl.value) {
+        <button mat-icon-button matSuffix (click)="tagControl.setValue('')" aria-label="Clear tag">
+          <mat-icon>clear</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+
+    @if (showAuthor) {
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Author Name</mat-label>
+        <mat-icon matPrefix>person</mat-icon>
+        <input
+          matInput
+          [formControl]="authorControl"
+          placeholder="Filter by author..."
+          (keydown.enter)="onApply()"
+        />
+        @if (authorControl.value) {
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="authorControl.setValue('')"
+            aria-label="Clear author"
+          >
+            <mat-icon>clear</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+    }
+  </div>
+
+  <div class="drawer-actions">
+    <button
+      mat-button
+      type="button"
+      (click)="onReset()"
+      [disabled]="!hasFilterValues() && !hasActiveAppliedFilters()"
+    >
+      Reset
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="onApply()"
+      [disabled]="!hasFilterValues()"
+    >
+      Apply Filter
+    </button>
+  </div>
+</aside>

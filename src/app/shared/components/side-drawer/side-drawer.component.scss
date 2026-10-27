@@ -1,0 +1,87 @@
+@use 'functions' as *;
+@use 'variables' as *;
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgb(0 0 0 / 40%);
+  z-index: 1000;
+  animation: fade-in 0.2s ease-in-out;
+}
+
+.drawer-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: rem(360);
+  max-width: 90vw;
+  height: 100vh;
+  background-color: $color-text-white;
+  box-shadow: $shadow-large;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: rem(16) rem(20);
+  border-bottom: $border-faded-white;
+
+  .header-title {
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+
+    h2 {
+      margin: 0;
+      font-size: rem(20);
+      font-weight: 600;
+      color: $color-title-black;
+    }
+
+    mat-icon {
+      color: $color-link-blue;
+    }
+  }
+}
+
+.drawer-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: rem(24) rem(20);
+  display: flex;
+  flex-direction: column;
+  gap: rem(16);
+
+  .filter-field {
+    width: 100%;
+  }
+}
+
+.drawer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: rem(12);
+  padding: rem(16) rem(20);
+  border-top: $border-faded-white;
+  background-color: #fafafa;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

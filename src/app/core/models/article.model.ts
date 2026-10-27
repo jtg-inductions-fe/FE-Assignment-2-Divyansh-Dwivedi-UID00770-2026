@@ -1,42 +1,38 @@
 export interface GetArticlesResponse {
-  success: boolean;
-  message: string;
-  data: ArticleData;
-  timestamp: string;
-}
-
-export interface ArticleData {
-  data: Article[];
-  totalItems: number;
-  totalPages: number;
-  currentPage: number;
-  pageSize: number;
+  articles: Article[];
+  articles_count: number;
 }
 
 export interface Article {
-  id: string;
+  id: number;
   title: string;
-  shortDescription: string;
   description: string;
+  body: string;
+  tagList: string[];
   image: string;
-  author: string;
   createdAt: string;
-  updatedAt: string;
-  tags: string[];
+  lastModified: string;
+  author: AuthorDetails;
+}
+
+export interface AuthorDetails {
+  username: string;
+  bio: string;
+  image: string;
+  following: boolean;
 }
 
 export interface GetUserArticlesResponse {
-  success: boolean;
-  data: Article[];
-  timestamp: string;
+  articles: Article[];
+  articles_count: number;
 }
 
 export interface CreateArticleRequest {
   title: string;
-  shortDescription: string;
   description: string;
+  body: string;
+  tagList: string[];
   image: string;
-  tags: string[];
 }
 
 export interface ArticleResponse {
@@ -44,4 +40,25 @@ export interface ArticleResponse {
   message: string;
   data: Article;
   timestamp: string;
+}
+
+export interface AuthorResponse {
+  authorId: number;
+  username: string;
+  bio: string;
+  image: string;
+  following: boolean;
+}
+
+export interface ArticleResponseData {
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  body: string;
+  tagList: string[];
+  image: string;
+  createdAt: string;
+  lastModified: string;
+  author: AuthorResponse;
 }

@@ -18,7 +18,9 @@
       {{ article.title }}
     </h1>
 
-    <p class="article-detail__meta">By {{ article.author }} - {{ article.createdAt | date }}</p>
+    <p class="article-detail__meta">
+      By {{ article.author.username }} - {{ article.createdAt | date }}
+    </p>
 
     @if (article.image) {
       <img class="article-detail__image" [src]="article.image" alt="article image" />
@@ -32,7 +34,7 @@
 
     <div>
       <mat-chip-set>
-        @for (tag of article.tags; track tag) {
+        @for (tag of article.tagList; track tag) {
           <mat-chip>
             {{ tag }}
           </mat-chip>

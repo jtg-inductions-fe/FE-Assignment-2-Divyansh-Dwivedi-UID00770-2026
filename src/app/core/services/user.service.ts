@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { API_ROUTES } from '@core/constants/api-routes';
-import { UserProfileResponse } from '@core/models/user.model';
+import { UserMeResponse, UserProfile } from '@core/models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,14 @@ import { UserProfileResponse } from '@core/models/user.model';
 export class UserService {
   private readonly http = inject(HttpClient);
 
-  getUserProfile(): Observable<UserProfileResponse> {
-    return this.http.get<UserProfileResponse>(API_ROUTES.USERS.USER_PROFILE);
+  getUserProfile(): Observable<UserProfile> {
+    return this.http.get<UserMeResponse>(API_ROUTES.USERS.USER_PROFILE).pipe(
+      map((response) => ({
+        id: response.id,
+        email: response.email,
+        firstName: response.UserDetails.firstName,
+        lastModified: response.lastModified,
+      }))
+    );
   }
 }

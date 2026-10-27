@@ -18,8 +18,8 @@ export const userProfileResolver: ResolveFn<UserProfile | null> = () => {
   // Otherwise, fetch from API and populate signal
   return userService.getUserProfile().pipe(
     map((response) => {
-      userStore.setUser(response.data);
-      return response.data;
+      userStore.setUser(response);
+      return response;
     })
   );
 };
